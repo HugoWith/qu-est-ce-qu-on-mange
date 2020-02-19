@@ -1,8 +1,9 @@
 <template>
-          <div class="row">
+          <div>
             <div v-for="(recipe, index) in recipes" v-bind:key="index">
               <div>
-                <h3>{{ recipe.strArea }}</h3>
+                <h1>Coucou</h1>
+                <h3>{{ recipe.strMeal }}</h3>
               </div>
           </div>
         </div>
@@ -25,7 +26,7 @@ export default {
       .then((response)  =>  {
         console.log(response);
         this.loading = false;
-        this.recipes = response.data
+        this.recipes = response.data.meals
         })
     }
   },
