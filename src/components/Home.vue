@@ -22,10 +22,7 @@
    </div>
     <div class="img-bg-home">
       <a class="button-home" href="#"
-        >ON MANGE ?<font-awesome-icon
-          class="fa-arrow"
-          icon="fa-long-arrow-alt-right"
-      /></a>
+        >ON MANGE ?</a>
     </div>
     <div class="button-home-border">
       <a href="#" class=""></a>
