@@ -7,6 +7,8 @@ import Recipes from "@/components/Recipes";
 // import ViewProfile from "@/components/profile/ViewProfile";
 // import firebase from "firebase";
 
+
+
 Vue.use(Router);
 
 export default new Router({
