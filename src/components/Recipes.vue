@@ -1,17 +1,24 @@
 <template>
-      <div id="container">
-          <h1>Test</h1>
-            <tr v-for='recipe in recipes' v-bind:key="recipe.idMeal">
-              <td>{{ recipe.strMeal }}</td>
-            </tr>
-    </div>
+    <ul v-if="roles">
+        <li v-for="recipe of recipes" v-bind:key=recipe.idMeal>
+            {{ recipe.strMeal }}
+        </li>
+    </ul>
 </template>
 
 <script>
+// Do you remember the 'yarn add graphql-tag'? :p
+import gql from 'graphql-tag'
+
 export default {
-  name: "Recipes",
-  data() {
-    return {};
-  }
-};
+    apollo: {
+        // Simple query that will update the 'roles' vue property
+        recipes: gql`query allRecipes {
+            recipe {
+                idMeal,
+                strMeal
+            }
+        }`
+    },
+}
 </script>
