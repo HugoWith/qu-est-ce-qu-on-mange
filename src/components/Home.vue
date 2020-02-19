@@ -17,12 +17,21 @@
     </div>
     <div class="img-bg-home">
       <a class="button-home" href="#"
-        >On mange ?<font-awesome-icon
+        >ON MANGE ?<font-awesome-icon
           class="fa-arrow"
           icon="fa-long-arrow-alt-right"
       /></a>
-      <img src="@/assets/path_2.png" alt="background" />
     </div>
+    <div class="button-home-border">
+      <a href="#" class=""></a>
+    </div>
+
+    <!-- <div
+      class="background-image"
+      style="background-image: url(@/assets/path_2.png)"
+    ></div> -->
+
+    <img class="img-bg" src="@/assets/path_2.png" alt="background" />
   </div>
 </template>
 
@@ -43,11 +52,24 @@ export default {
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   margin: 0 auto;
   width: 414px;
   height: 100vh;
   border: 1px solid black;
+}
+
+.no-idea {
+  width: 45%;
+  margin-top: 20px;
+}
+
+.no-idea p {
+  color: #fdcb5f;
 }
 
 .button-home {
@@ -58,14 +80,41 @@ export default {
     #fdcb5f 98%
   );
   border-radius: 100px;
-  font-family: Gotham-Black;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
   font-size: 16px;
+  padding: 15px 90px 15px 50px;
   color: #ffffff;
+  z-index: 2;
+}
+
+.button-home-border {
+  bottom: 55px;
+  position: absolute;
+  width: 70%;
+  height: 8%;
+  right: -27px;
+  z-index: 3;
   border: 1px solid #000000;
-  border-radius: 34.5px;
+  border-radius: 100px;
 }
 
 .fa-arrow {
   color: black;
+}
+
+.img-bg {
+  width: 100%;
+  height: 51%;
+  position: relative;
+  bottom: -115px;
+  z-index: 1;
+}
+
+.img-bg-home {
+  bottom: 60px;
+  z-index: 2;
+  position: absolute;
+  right: -15px;
 }
 </style>
