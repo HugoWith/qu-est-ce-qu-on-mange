@@ -5,12 +5,15 @@
         </li>
     </ul>
 </template>
-
 <script>
-// Do you remember the 'yarn add graphql-tag'? :p
+// Do you remember the 'yarn add graphql-tag'? :import gql from 'graphql-tag'
 import gql from 'graphql-tag'
-
+import Recipes from "@/components/Recipes";
 export default {
+    name: Recipes,
+    data(){
+        return{}
+    },
     apollo: {
         // Simple query that will update the 'roles' vue property
         recipes: gql`query allRecipes {
