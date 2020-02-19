@@ -129,7 +129,7 @@ a {
   display: flex;
   justify-content: start;
   margin-left: 0.7em;
-  margin-top: 0.7em;
+  margin-top: 1em;
 }
 .home-title1 h1 {
   font-weight:900;
@@ -154,6 +154,7 @@ line-height: 21px
 }
 .home-title3 h1 {
   font-weight:100;
+  line-height: 15px;
 }
 
 .home-title4{
