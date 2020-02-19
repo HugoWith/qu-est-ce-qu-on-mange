@@ -6,14 +6,12 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueApollo from "vue-apollo";
 import ApolloClient from "apollo-boost";
-import { HttpLink } from "apollo-link-http";
+import { createHttpLink } from "apollo-link-http";
 
 Vue.use(VueApollo);
 
 // All the graphql requests will be made at yourdomaine.com/graphql
-const httpLink = new HttpLink({
-  uri: "http://localhost:5000/graphql"
-});
+const httpLink = createHttpLink({ uri: "http://localhost:5000/graphql" });
 
 // We give this to the graphql client
 const apolloClient = new ApolloClient({
