@@ -7,8 +7,31 @@
 <script>
 export default {
   name: "App",
-  components: {}
+  components: {},
+  data(){
+        return {
+          idMeal: '',
+          strMeal: ''
+          }
+      },
 };
+</script>
+
+<script>
+import gql from 'graphql-tag'
+
+    export default {
+      name: 'app',
+      /* [...] */
+      apollo: {
+        recipes: gql`query {
+          contacts {
+            idMeal,
+            strMeal
+          }
+        }`,
+      },
+    }
 </script>
 
 <style>
