@@ -1,32 +1,40 @@
 <template>
-  <div class="recipes">
-    <p>test</p>
-    <ul v-if="roles">
-      <li v-for="recipe of recipes" v-bind:key="recipe.idMeal">
-        {{ recipe.strMeal }}
-      </li>
-    </ul>
+  <div id="container">
+      <div class="wrapper">
+          <div class="row">
+            <div v-for="(recipe, index) in recipes" v-bind:key="index">
+              <div>
+                <h3>{{ recipe.strArea }}</h3>
+              </div>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
-<script>
-// Do you remember the 'yarn add graphql-tag'? :import gql from 'graphql-tag'
-import gql from "graphql-tag";
 
+<script>
+import axios from 'axios';
 export default {
-  name: "Recipes",
-  data() {
-    return {};
+  name: 'Recipes',
+  data () {
+    return {
+      recipes: [],
+      loading: false
+    }
   },
-  apollo: {
-    // Simple query that will update the 'roles' vue property
-    recipes: gql`
-      query allRecipes {
-        recipe {
-          idMeal
-          strMeal
-        }
-      }
-    `
-  }
-};
+  methods: {
+    getRecipes: function () {
+      this.loading = true;
+      axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
+      .then((response)  =>  {
+        console.log(response);
+        this.loading = false;
+        this.recipes = response.data
+        })
+    }
+  },
+   beforeMount(){
+    this.getRecipes()
+ },
+}
 </script>
