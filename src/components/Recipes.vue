@@ -1,7 +1,7 @@
 <template>
   <div class="recipes">
     <p>test</p>
-    <ul v-if="roles">
+    <ul v-if="recipes">
       <li v-for="recipe of recipes" v-bind:key="recipe.idMeal">
         {{ recipe.strMeal }}
       </li>
