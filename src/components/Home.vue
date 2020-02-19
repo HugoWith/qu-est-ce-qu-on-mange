@@ -12,9 +12,14 @@
     <div class="home-title3">
       <h1 class="h1-light">QU'ON</h1>
     </div>
-    <div class="home-title4">
-      <h1>MANGE ?</h1>
-    </div>
+    <div class="onMange">
+      <div class="home-title4">
+        <h1>MANGE </h1>
+      </div>
+      <div class="home-title5">
+        <h1>? </h1>
+      </div>
+   </div>
     <div class="img-bg-home">
       <a class="button-home" href="#"
         >ON MANGE ?<font-awesome-icon
@@ -124,10 +129,11 @@ a {
   display: flex;
   justify-content: start;
   margin-left: 0.7em;
-  margin-top: 0.7em;
+  margin-top: 1em;
 }
 .home-title1 h1 {
   font-weight:900;
+line-height: 21px
 }
 
 .home-title2{
@@ -137,6 +143,7 @@ a {
 }
 .home-title2 h1{
   font-weight:900;
+
 }
 
 .home-title3{
@@ -147,6 +154,7 @@ a {
 }
 .home-title3 h1 {
   font-weight:100;
+  line-height: 15px;
 }
 
 .home-title4{
@@ -158,5 +166,15 @@ a {
 
 .home-title4 h1 {
   font-weight:900;
+}
+
+.home-title5 h1 {
+  font-weight:100;
+  font-size: 50px;
+}
+
+.onMange{
+  display: flex;
+  justify-content: center
 }
 </style>
