@@ -6,13 +6,13 @@
     <div class="home-title1">
       <h1>QU'EST</h1>
     </div>
-    <div class="home-title1">
+    <div class="home-title2">
       <h1>CE</h1>
     </div>
-    <div class="home-title1">
+    <div class="home-title3">
       <h1 class="h1-light">QU'ON</h1>
     </div>
-    <div class="home-title1">
+    <div class="home-title4">
       <h1>MANGE ?</h1>
     </div>
     <div class="img-bg-home">
@@ -31,7 +31,7 @@
       style="background-image: url(@/assets/path_2.png)"
     ></div> -->
 
-    <img class="img-bg" src="@/assets/path_2.png" alt="background" />
+    <img class="img-bg" src="@/assets/path_2.png" alt="background"/>
   </div>
 </template>
 
@@ -116,5 +116,47 @@ a {
   z-index: 2;
   position: absolute;
   right: -15px;
+}
+
+.home-title1{
+  font-weight:900;
+  font-size: 25px;
+  display: flex;
+  justify-content: start;
+  margin-left: 0.7em;
+  margin-top: 0.7em;
+}
+.home-title1 h1 {
+  font-weight:900;
+}
+
+.home-title2{
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+}
+.home-title2 h1{
+  font-weight:900;
+}
+
+.home-title3{
+  font-size: 25px;
+  display: flex;
+  justify-content: start;
+  margin-left: 4em;
+}
+.home-title3 h1 {
+  font-weight:100;
+}
+
+.home-title4{
+  font-size: 25px;
+  display: flex;
+  justify-content:center;
+  margin-left: 4.7em;
+}
+
+.home-title4 h1 {
+  font-weight:900;
 }
 </style>
