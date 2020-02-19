@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/components/Home";
+import Recipes from "@/components/Recipes"
 // import Signup from "@/components/auth/Signup";
 // import Login from "@/components/auth/Login";
 // import ViewProfile from "@/components/profile/ViewProfile";
@@ -14,6 +15,11 @@ export default new Router({
       path: "/",
       name: "Home",
       component: Home
+    },
+    {
+      path: "/recipes",
+      name: "Recipes",
+      component: Recipes
     }
   ]
 });
