@@ -1,6 +1,4 @@
 <template>
-  <div id="container">
-      <div class="wrapper">
           <div class="row">
             <div v-for="(recipe, index) in recipes" v-bind:key="index">
               <div>
@@ -8,8 +6,6 @@
               </div>
           </div>
         </div>
-      </div>
-  </div>
 </template>
 
 <script>
