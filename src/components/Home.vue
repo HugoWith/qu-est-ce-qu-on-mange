@@ -86,17 +86,18 @@ a {
   padding: 15px 90px 15px 50px;
   color: #ffffff;
   z-index: 2;
+  margin-right: 18em
 }
 
 .button-home-border {
-  bottom: 55px;
-  position: absolute;
-  width: 70%;
-  height: 8%;
-  right: -27px;
-  z-index: 3;
-  border: 1px solid #000000;
-  border-radius: 100px;
+bottom: 50px;
+    position: absolute;
+    width: 31%;
+    height: 8%;
+    right: 217px;
+    z-index: 3;
+    border: 1px solid #000000;
+    border-radius: 100px;
 }
 
 .fa-arrow {
