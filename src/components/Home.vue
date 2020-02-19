@@ -16,7 +16,11 @@
       <h1>MANGE ?</h1>
     </div>
     <div class="img-bg-home">
-      <a class="button-home" href="#">On mange ?</a>
+      <a class="button-home" href="#"
+        >On mange ?<font-awesome-icon
+          class="fa-arrow"
+          icon="fa-long-arrow-alt-right"
+      /></a>
       <img src="@/assets/path_2.png" alt="background" />
     </div>
   </div>
@@ -59,7 +63,9 @@ export default {
   color: #ffffff;
   border: 1px solid #000000;
   border-radius: 34.5px;
-  background: #ffffff;
-  background: #ffffff;
+}
+
+.fa-arrow {
+  color: black;
 }
 </style>
