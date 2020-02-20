@@ -72,8 +72,13 @@ export default {
       let arr = this.ingredients.filter(Boolean);
       console.log(arr);
       return arr.map((itm, i) => {
+<<<<<<< HEAD
         return { ingredients: itm, measures: this.measures[i] };
       });
+=======
+        return { ingredients: itm, measures: this.measures[i] }
+      })
+>>>>>>> 31d6d91bbfee5eea2d1a51d42e9266a2b1195d64
     }
   },
 
