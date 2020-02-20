@@ -24,7 +24,7 @@ export default {
     return {
       recipes: [],
       loading: false,
-      ingredients: [{ ingredient: "Foo" }, { ingredient: "Bar" }]
+      ingredients: []
     };
   },
   methods: {
@@ -35,8 +35,25 @@ export default {
         .get("https://www.themealdb.com/api/json/v1/1/random.php")
         .then(response => {
           console.log(response.data.meals);
+          console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
+          this.ingredients.push(
+            response.data.meals[0].strIngredient1 +
+              response.data.meals[0].strIngredient2 +
+              response.data.meals[0].strIngredient3 +
+              response.data.meals[0].strIngredient4 +
+              response.data.meals[0].strIngredient5 +
+              response.data.meals[0].strIngredient6 +
+              response.data.meals[0].strIngredient7 +
+              response.data.meals[0].strIngredient8 +
+              response.data.meals[0].strIngredient9 +
+              response.data.meals[0].strIngredient10
+          );
+          // const html = `<li>${this.ingredients}</li>`;
+          // document
+          //   .querySelector(".ingredients-list")
+          //   .insertAdjacentHTML("beforeend", html);
         });
     }
   },
