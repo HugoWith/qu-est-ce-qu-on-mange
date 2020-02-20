@@ -143,7 +143,9 @@ export default {
   },
   computed: {
     list() {
-      return this.ingredients.map((itm, i) => {
+      let arr = this.ingredients.filter(Boolean);
+      console.log(arr);
+      return arr.map((itm, i) => {
         return { ingredients: itm, measures: this.measures[i] }
       })
     }
