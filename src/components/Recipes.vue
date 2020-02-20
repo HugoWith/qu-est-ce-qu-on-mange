@@ -1,4 +1,5 @@
 <template>
+
         <div class="container">
             <div v-for="(recipe, index) in recipes" v-bind:key="index">
               <div>
@@ -9,33 +10,36 @@
               </div>
           </div>
         </div>
+
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'Recipes',
-  data () {
+  name: "Recipes",
+  data() {
     return {
       recipes: [],
       loading: false
-    }
+    };
   },
   methods: {
-    getRecipes: function () {
+    getRecipes: function() {
       this.loading = true;
+
       axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
       .then((response)  =>  {
         console.log(response.data.meals);
         this.loading = false;
         this.recipes = response.data.meals
         })
+
     }
   },
-   beforeMount(){
-    this.getRecipes()
- },
-}
+  beforeMount() {
+    this.getRecipes();
+  }
+};
 </script>
 
 <style>
