@@ -8,14 +8,16 @@
         <h1>{{ recipe.strMeal }}</h1>
       </div>
     </div>
-    <div class="ingredients-list">
-      <ul v-for="(ingredients, measures, index) in detailrecipe" :key="index">
-        <li
-          v-for="(ingredient, index) in ingredients"
-          :key="index"
-        >{{ ingredient }} - {{ measures }}</li>
-        <!-- <li v-for="(ingredient, index) in ingredients" :key="index">{{ ingredient }}</li> -->
-      </ul>
+    <div class="ingredients-list" v-for="(recipe, index) in fullrecipe" :key="index">
+      <!-- <ul v-for="(ingredient, index) in ingredients" :key="index"> -->
+      <!-- <span v-for="(measure, index) in measures" :key="index">
+          <li>{{ ingredient }} - {{ measure }}</li>
+      </span>-->
+
+      <span>A value is: @{{recipe.ingredient}}</span>
+      <span>B value is: @{{recipes.measure}}</span>
+
+      <!-- <li v-for="(ingredient, index) in ingredients" :key="index">{{ ingredient }}</li> -->
     </div>
   </div>
 </template>
@@ -29,7 +31,8 @@ export default {
       recipes: [],
       loading: false,
       ingredients: [],
-      detailrecipe: { ingredients: [], measures: [] }
+      measures: []
+      // detailrecipe: { ingredients: [], measures: [] }
     };
   },
   methods: {
@@ -43,47 +46,31 @@ export default {
           console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient1
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient2
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient3
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient4
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient5
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient6
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient7
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient8
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient9
-          );
-          this.detailrecipe.ingredients.push(
-            response.data.meals[0].strIngredient10
-          );
+          this.ingredients.push(response.data.meals[0].strIngredient1);
+          this.ingredients.push(response.data.meals[0].strIngredient2);
+          this.ingredients.push(response.data.meals[0].strIngredient3);
+          this.ingredients.push(response.data.meals[0].strIngredient4);
+          this.ingredients.push(response.data.meals[0].strIngredient5);
+          this.ingredients.push(response.data.meals[0].strIngredient6);
+          this.ingredients.push(response.data.meals[0].strIngredient7);
+          this.ingredients.push(response.data.meals[0].strIngredient8);
+          this.ingredients.push(response.data.meals[0].strIngredient9);
+          this.ingredients.push(response.data.meals[0].strIngredient10);
 
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure1);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure2);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure3);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure4);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure5);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure6);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure7);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure8);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure9);
-          this.detailrecipe.measures.push(response.data.meals[0].strMeasure10);
+          this.measures.push(response.data.meals[0].strMeasure1);
+          this.measures.push(response.data.meals[0].strMeasure2);
+          this.measures.push(response.data.meals[0].strMeasure3);
+          this.measures.push(response.data.meals[0].strMeasure4);
+          this.measures.push(response.data.meals[0].strMeasure5);
+          this.measures.push(response.data.meals[0].strMeasure6);
+          this.measures.push(response.data.meals[0].strMeasure7);
+          this.measures.push(response.data.meals[0].strMeasure8);
+          this.measures.push(response.data.meals[0].strMeasure9);
+          this.measures.push(response.data.meals[0].strMeasure10);
+
+          const fullrecipe = ingredients.map(
+            ingredient => ingredient + measures[index]
+          );
           // this.ingredients.push(
           //   response.data.meals[0].strIngredient1 +
           //     " - " +
@@ -141,6 +128,7 @@ export default {
         });
     }
   },
+
   beforeMount() {
     this.getRecipes();
   }
