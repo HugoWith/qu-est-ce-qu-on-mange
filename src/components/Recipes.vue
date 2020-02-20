@@ -72,8 +72,10 @@ export default {
       let arr = this.ingredients.filter(Boolean);
       console.log(arr);
       return arr.map((itm, i) => {
-        return { ingredients: itm, measures: this.measures[i] };
-      });
+
+        return { ingredients: itm, measures: this.measures[i] }
+      })
+
     }
   },
 
