@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="ingredients-list">
-      <ul v-for="obj in list" v-bind:key="obj">
+      <ul v-for="obj in list" v-bind:key="obj.ingredients">
         <li>{{obj.ingredients}} -- {{obj.measures}}</li>
       </ul>
     </div>
