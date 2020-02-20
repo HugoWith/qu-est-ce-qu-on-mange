@@ -8,16 +8,11 @@
         <h1>{{ recipe.strMeal }}</h1>
       </div>
     </div>
-    <div class="ingredients-list" v-for="(recipe, index) in fullrecipe" :key="index">
-      <!-- <ul v-for="(ingredient, index) in ingredients" :key="index"> -->
-      <!-- <span v-for="(measure, index) in measures" :key="index">
-          <li>{{ ingredient }} - {{ measure }}</li>
-      </span>-->
 
-      <span>A value is: @{{recipe.ingredient}}</span>
-      <span>B value is: @{{recipes.measure}}</span>
-
-      <!-- <li v-for="(ingredient, index) in ingredients" :key="index">{{ ingredient }}</li> -->
+    <div class="ingredients-list">
+      <ul v-for="obj in list" v-bind:key="obj.ingredients">
+        <li>{{obj.ingredients}} -- {{obj.measures}}</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -32,7 +27,6 @@ export default {
       loading: false,
       ingredients: [],
       measures: []
-      // detailrecipe: { ingredients: [], measures: [] }
     };
   },
   methods: {
@@ -46,6 +40,7 @@ export default {
           console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
+
           this.ingredients.push(response.data.meals[0].strIngredient1);
           this.ingredients.push(response.data.meals[0].strIngredient2);
           this.ingredients.push(response.data.meals[0].strIngredient3);
@@ -67,65 +62,14 @@ export default {
           this.measures.push(response.data.meals[0].strMeasure8);
           this.measures.push(response.data.meals[0].strMeasure9);
           this.measures.push(response.data.meals[0].strMeasure10);
-
-          const fullrecipe = ingredients.map(
-            ingredient => ingredient + measures[index]
-          );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient1 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure1
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient2 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure2
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient3 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure3
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient4 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure4
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient5 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure5
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient6 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure6
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient7 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure7
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient8 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure8
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient9 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure9
-          // );
-          // this.ingredients.push(
-          //   response.data.meals[0].strIngredient10 +
-          //     " - " +
-          //     response.data.meals[0].strMeasure10
-          // );
-          // const html = `<li>${this.ingredients}</li>`;
-          // document
-          //   .querySelector(".ingredients-list")
-          //   .insertAdjacentHTML("beforeend", html);
         });
+    }
+  },
+  computed: {
+    list() {
+      return this.ingredients.map((itm, i) => {
+        return { ingredients: itm, measures: this.measures[i] };
+      });
     }
   },
 
@@ -148,3 +92,10 @@ export default {
   margin: 10px 10px;
 }
 </style>
+
+
+
+
+
+
+
