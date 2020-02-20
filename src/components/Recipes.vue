@@ -1,9 +1,11 @@
 <template>
-          <div>
+        <div class="container">
             <div v-for="(recipe, index) in recipes" v-bind:key="index">
               <div>
-                <h1>Coucou</h1>
-                <h3>{{ recipe.strMeal }}</h3>
+                <div class="borderImg">
+                  <img class="imgMeal" :src="recipe.strMealThumb" alt="">
+                </div>
+                <h1>{{ recipe.strMeal }}</h1>
               </div>
           </div>
         </div>
@@ -24,7 +26,7 @@ export default {
       this.loading = true;
       axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
       .then((response)  =>  {
-        console.log(response);
+        console.log(response.data.meals);
         this.loading = false;
         this.recipes = response.data.meals
         })
@@ -35,3 +37,17 @@ export default {
  },
 }
 </script>
+
+<style>
+.imgMeal{
+  width: 100%;
+  height: 20%;
+  border-radius: 40px;
+  padding:  20px 20px;
+}
+
+.borderImg{
+  border: solid yellow 5px;
+  margin: 10px 10px
+}
+</style>
