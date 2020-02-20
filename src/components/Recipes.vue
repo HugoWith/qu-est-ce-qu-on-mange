@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
@@ -14,6 +15,7 @@
       </ul>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -30,6 +32,7 @@ export default {
   methods: {
     getRecipes: function() {
       this.loading = true;
+
 
       axios
         .get("https://www.themealdb.com/api/json/v1/1/random.php")
@@ -93,6 +96,7 @@ export default {
           //   .querySelector(".ingredients-list")
           //   .insertAdjacentHTML("beforeend", html);
         });
+
     }
   },
   beforeMount() {
@@ -102,6 +106,7 @@ export default {
 </script>
 
 <style>
+
 .imgMeal {
   width: 100%;
   height: 20%;
