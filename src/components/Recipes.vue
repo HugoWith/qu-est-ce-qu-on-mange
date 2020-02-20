@@ -5,13 +5,13 @@
         <div class="borderImg">
           <img class="imgMeal" :src="recipe.strMealThumb" alt />
         </div>
-        <h1>{{ recipe.strMeal }}</h1>
+        <h1 class=".recipe-title">{{ recipe.strMeal }}</h1>
       </div>
     </div>
 
-    <div class="ingredients-list">
-      <ul v-for="obj in list" v-bind:key="obj.ingredients">
-        <li>{{obj.ingredients}} -- {{obj.measures}}</li>
+    <div>
+      <ul v-for="obj in list" v-bind:key="obj.ingredients" class="ingredients-list">
+        <li>{{obj.ingredients}} - {{obj.measures}}</li>
       </ul>
     </div>
   </div>
@@ -26,7 +26,8 @@ export default {
       recipes: [],
       loading: false,
       ingredients: [],
-      measures: []
+      measures: [],
+      filteredrecipe: []
     };
   },
   methods: {
@@ -65,9 +66,12 @@ export default {
         });
     }
   },
+
   computed: {
     list() {
-      return this.ingredients.map((itm, i) => {
+      let arr = this.ingredients.filter(Boolean);
+      console.log(arr);
+      return arr.map((itm, i) => {
         return { ingredients: itm, measures: this.measures[i] };
       });
     }
@@ -83,13 +87,27 @@ export default {
 .imgMeal {
   width: 100%;
   height: 20%;
-  border-radius: 40px;
+  border-radius: 50%;
   padding: 20px 20px;
 }
 
 .borderImg {
   border: solid yellow 5px;
   margin: 10px 10px;
+}
+
+.recipe-title {
+  margin: 15px 5px 15px 5px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.ingredients-list li {
+  list-style: none;
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 </style>
 
