@@ -11,8 +11,8 @@
           <img class="imgRecipe" :src="recipe.strMealThumb" alt />
         </div>
         <div class="title">
-          <h3>{{recipe.strMeal.toUpperCase()}}</h3>
-          <h4>{{recipe.strArea}}-{{recipe.strCategory}}</h4>
+          <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+          <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
         </div>
       </div>
     </div>
@@ -35,8 +35,10 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "Recipes",
+
   data() {
     return {
       recipes: [],
