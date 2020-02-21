@@ -15,9 +15,9 @@
       </ul>
     </div>
     <div class="img-bg-recipes">
-      <a class="button-recipes" href="#"
-        >ON AIME ?</a>
     </div>
+                  <a class="button-like" href="#"
+        >♥️</a>
   </div>
 </template>
 
@@ -121,6 +121,7 @@ export default {
     z-index: 2;
     position: absolute;
     right: 29%;
+
 }
 .button-recipes{
   background-image: linear-gradient(
@@ -136,6 +137,23 @@ export default {
   padding: 15px 90px 15px 50px;
   color: #ffffff;
   z-index: 2;
+}
+.button-like{
+    background-image: linear-gradient(
+    73deg,
+    #27292d 0%,
+    #f5cf66 74%,
+    #fdcb5f 98%
+  );
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 40px 10px 40px;
+  color: #ffffff;
+  z-index: 2;
+  text-align: center;
+  align-items: center;
 }
 </style>
 
