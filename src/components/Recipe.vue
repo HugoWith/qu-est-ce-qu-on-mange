@@ -9,7 +9,7 @@
           <img class="imgRecipe" :src="recipe.strMealThumb" alt />
         </div>
         <div class="title">
-            <p>coucou</p>
+            <p>{{recipe.strMeal}}</p>
         </div>
       </div>
     </div>
@@ -129,10 +129,17 @@ export default {
 }
 .title{
   position:absolute;
+  background-color: var(--offWhite);
+  margin-top: 21em;
+    margin-left: 2.2em;
+    width: 19em;
+    height: 4em;
+    border-radius: 1em;
 }
 .imgRecipe{
   width: 17em;
   height: 17em;
   border-radius: 3em;
+
 }
 </style>
