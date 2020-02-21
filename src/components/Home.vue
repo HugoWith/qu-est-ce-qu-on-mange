@@ -60,6 +60,9 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  color: black;
+}
 .container {
   margin: 0 auto;
   width: 414px;
