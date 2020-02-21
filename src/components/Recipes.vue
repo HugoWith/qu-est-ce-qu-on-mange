@@ -2,22 +2,33 @@
   <div class="container-recipes">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
+        <div class="button-back">
+          <a href="#" class>
+            <i class="fas fa-long-arrow-alt-left"></i>
+          </a>
+        </div>
         <div class="borderImg">
           <img class="imgMeal" :src="recipe.strMealThumb" alt />
+          <h1 class=".recipe-title">{{ recipe.strMeal.toUpperCase() }}</h1>
+          <div class="guidelines">
+            <h2 class=".guidelines-title">Ce dont tu as besoin 👇</h2>
+          </div>
+          <div>
+            <ul v-for="obj in list" v-bind:key="obj.ingredients" class="ingredients-list">
+              <li>{{obj.ingredients}} - {{obj.measures}}</li>
+            </ul>
+          </div>
+          <div class="guidelines">
+            <h2 class=".guidelines-title">Ce que tu dois faire 👨‍🍳</h2>
+          </div>
+          <div class="instructions">
+            <p>{{instruction}}</p>
+            <hr />
+          </div>
         </div>
-        <h1 class=".recipe-title">{{ recipe.strMeal }}</h1>
       </div>
     </div>
-
-    <div>
-      <ul v-for="obj in list" v-bind:key="obj.ingredients" class="ingredients-list">
-        <li>{{obj.ingredients}} - {{obj.measures}}</li>
-      </ul>
-    </div>
-    <div class="img-bg-recipes">
-    </div>
-                  <a class="button-like" href="#"
-        >♥️</a>
+    <a class="button-like" href="#">♥️</a>
   </div>
 </template>
 
@@ -31,7 +42,8 @@ export default {
       loading: false,
       ingredients: [],
       measures: [],
-      filteredrecipe: []
+      filteredrecipe: [],
+      instruction: null
     };
   },
   methods: {
@@ -67,6 +79,8 @@ export default {
           this.measures.push(response.data.meals[0].strMeasure8);
           this.measures.push(response.data.meals[0].strMeasure9);
           this.measures.push(response.data.meals[0].strMeasure10);
+
+          this.instruction = response.data.meals[0].strInstructions;
         });
     }
   },
@@ -76,10 +90,8 @@ export default {
       let arr = this.ingredients.filter(Boolean);
       console.log(arr);
       return arr.map((itm, i) => {
-
-        return { ingredients: itm, measures: this.measures[i] }
-      })
-
+        return { ingredients: itm, measures: this.measures[i] };
+      });
     }
   },
 
@@ -90,46 +102,85 @@ export default {
 </script>
 
 <style>
-.container-recipes{
-    margin: 0 auto;
-  width: 414px;
-  height: 140vh;
+.container-recipes {
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
   border: 1px solid black;
 }
 .imgMeal {
-  width: 100%;
+  width: 90%;
   height: 20%;
+  margin: 10px 10px 10px 10px;
   border-radius: 50%;
-  padding: 20px 20px;
+  border: 30px solid white;
 }
 
 .borderImg {
-  border: solid yellow 5px;
+  background-color: #fdcb5f;
+  border-radius: 10px;
   margin: 10px 10px;
 }
 
-.recipe-title {
+.borderImg h1 {
+  color: black;
   margin: 15px 5px 15px 5px;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 30px;
+}
+
+.guidelines {
+  color: black;
+  margin: 15px 5px 15px 5px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .ingredients-list li {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 100;
   list-style: none;
   text-align: left;
   margin-left: 20px;
   margin-top: 10px;
 }
 
-.img-bg-recipes{
-    bottom: -80%;
-    z-index: 2;
-    position: absolute;
-    right: 29%;
-
+.button-back {
+  margin: 30px 30px 30px 30px;
+  border: 1px solid #fdcb5f;
+  border-radius: 100px;
+  z-index: 1;
+  width: 25%;
 }
-.button-recipes{
+
+.button-back i {
+  text-decoration: none;
+  color: #c7e591;
+  position: relative;
+  left: -20px;
+  margin-left: 10px;
+  font-size: 40px;
+}
+
+.instructions {
+  padding-bottom: 15px;
+  color: black;
+  margin: 15px 5px 30px 5px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: lighter;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.img-bg-recipes {
+  bottom: -80%;
+  z-index: 2;
+  position: absolute;
+  right: 29%;
+}
+.button-recipes {
   background-image: linear-gradient(
     73deg,
     #27292d 0%,
@@ -144,8 +195,8 @@ export default {
   color: #ffffff;
   z-index: 2;
 }
-.button-like{
-    background-image: linear-gradient(
+.button-like {
+  background-image: linear-gradient(
     73deg,
     #27292d 0%,
     #f5cf66 74%,
