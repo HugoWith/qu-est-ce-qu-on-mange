@@ -1,7 +1,7 @@
 <template>
   <div class="container-recipe">
     <div class="btn-back">
-      <a href="/"><font-awesome-icon icon="user-secret" /></a>
+      <a href="/"><i class="fas fa-long-arrow-alt-left"></i></a>
     </div>
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div class="cadre">
@@ -10,11 +10,14 @@
         </div>
         <div class="title">
             <h3>{{recipe.strMeal}}</h3>
-            <h4>{{recipe.strArea}}-{{recipe.strCategory}}</h4>
+            <div class="categHeart">
+              <h4>{{recipe.strArea}}-{{recipe.strCategory}}</h4>
+              <h5>♥️</h5>
+            </div>
         </div>
       </div>
+      <img class="img-bg-recipe" src="@/assets/path_2.png" alt="background"/>
     </div>
-    <img class="img-bg-recipe" src="@/assets/path_2.png" alt="background"/>
   </div>
 </template>
 
@@ -104,27 +107,31 @@ a{
   width: 414px;
   height: 100vh;
   border: 1px solid black;
+  z-index: 3;
 }
 .img-bg-recipe{
   width: 100%;
-  height: 48%;
-  position: relative;
-  z-index: 1;
+  height: 100%;
+  z-index: 2;
 }
 .btn-back {
   text-decoration: none;
-  display: flex;
-  justify-content: start;
   border: var(--primaryColor) solid 1px;
   color: var(--mainGreen);
   width: 20vw;
+  border-radius: 1em;
+  text-align: center;
+  align-items: center;
+  font-size: 25px;
+  margin: 1em;
 }
 .cadre{
   background-color: var(--primaryColor);
   width:23em;
   height: 30em;
-  margin: 0 auto;
+  margin: 1em auto;
   border-radius: 20px;
+  z-index: 1;
 }
 .photo{
     background-color: var(--offWhite);
@@ -153,6 +160,15 @@ a{
   width: 17em;
   height: 17em;
   border-radius: 3em;
+  z-index: 2;
+}
+.categHeart{
+  justify-content: space-between;
+  display: flex;
+  margin-right: 0.2em;
+}
 
+.categHeart h5 {
+  font-size: 20px
 }
 </style>
