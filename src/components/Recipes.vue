@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-recipes">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
         <div class="borderImg">
@@ -86,6 +86,12 @@ export default {
 </script>
 
 <style>
+.container-recipes{
+    margin: 0 auto;
+  width: 414px;
+  height: 140vh;
+  border: 1px solid black;
+}
 .imgMeal {
   width: 100%;
   height: 20%;
