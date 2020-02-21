@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-recipes">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
         <div class="button-back">
@@ -9,7 +9,7 @@
         </div>
         <div class="borderImg">
           <img class="imgMeal" :src="recipe.strMealThumb" alt />
-          <h1 class=".recipe-title">{{ recipe.strMeal }}</h1>
+          <h1 class=".recipe-title">{{ recipe.strMeal.toUpperCase() }}</h1>
           <div class="guidelines">
             <h2 class=".guidelines-title">Ce dont tu as besoin 👇</h2>
           </div>
@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <a class="button-like" href="#">♥️</a>
   </div>
 </template>
 
@@ -101,6 +102,12 @@ export default {
 </script>
 
 <style>
+.container-recipes {
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+  border: 1px solid black;
+}
 .imgMeal {
   width: 90%;
   height: 20%;
@@ -115,14 +122,16 @@ export default {
   margin: 10px 10px;
 }
 
-.recipe-title {
+.borderImg h1 {
+  color: black;
   margin: 15px 5px 15px 5px;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 30px;
 }
 
 .guidelines {
+  color: black;
   margin: 15px 5px 15px 5px;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
@@ -157,11 +166,51 @@ export default {
 
 .instructions {
   padding-bottom: 15px;
+  color: black;
   margin: 15px 5px 30px 5px;
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
   font-size: 10px;
   line-height: 15px;
+}
+
+.img-bg-recipes {
+  bottom: -80%;
+  z-index: 2;
+  position: absolute;
+  right: 29%;
+}
+.button-recipes {
+  background-image: linear-gradient(
+    73deg,
+    #27292d 0%,
+    #f5cf66 74%,
+    #fdcb5f 98%
+  );
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 15px 90px 15px 50px;
+  color: #ffffff;
+  z-index: 2;
+}
+.button-like {
+  background-image: linear-gradient(
+    73deg,
+    #27292d 0%,
+    #f5cf66 74%,
+    #fdcb5f 98%
+  );
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 40px 10px 40px;
+  color: #ffffff;
+  z-index: 2;
+  text-align: center;
+  align-items: center;
 }
 </style>
 
