@@ -1,7 +1,9 @@
 <template>
   <div class="container-recipe">
-    <div class="btn-back">
-      <a href="/"><font-awesome-icon icon="user-secret" /></a>
+    <div class="button-back">
+      <a href="/" class>
+        <i class="fas fa-long-arrow-alt-left"></i>
+      </a>
     </div>
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div class="cadre">
@@ -9,12 +11,25 @@
           <img class="imgRecipe" :src="recipe.strMealThumb" alt />
         </div>
         <div class="title">
-            <h3>{{recipe.strMeal}}</h3>
-            <h4>{{recipe.strArea}}-{{recipe.strCategory}}</h4>
+          <h3>{{recipe.strMeal.toUpperCase()}}</h3>
+          <h4>{{recipe.strArea}}-{{recipe.strCategory}}</h4>
         </div>
       </div>
     </div>
-    <img class="img-bg-recipe" src="@/assets/path_2.png" alt="background"/>
+    <div class="button-swipe">
+      <a href class="btn-nope">
+        <i class="fas fa-times"></i>
+      </a>
+      <a href class="btn-recipe">
+        <i class="fas fa-book"></i>
+      </a>
+      <a href class="btn-yes">
+        <i class="fas fa-heart"></i>
+      </a>
+    </div>
+    <div class="background">
+      <img class="img-bg-recipe" src="@/assets/path_2.png" alt="background" />
+    </div>
   </div>
 </template>
 
@@ -72,10 +87,8 @@ export default {
       let arr = this.ingredients.filter(Boolean);
       console.log(arr);
       return arr.map((itm, i) => {
-
-        return { ingredients: itm, measures: this.measures[i] }
-      })
-
+        return { ingredients: itm, measures: this.measures[i] };
+      });
     }
   },
 
@@ -87,72 +100,122 @@ export default {
 
 <style>
 :root {
-  --primaryColor: #FDCB5F;
-  --mainRed: #FF8C8C;
+  --primaryColor: #fdcb5f;
+  --mainRed: #ff8c8c;
   --offWhite: #f7f7f7;
   --mainBlack: #000000;
-  --secondRed: #FE5068;
-  --mainGreen: #C7E591;
-  --mainBlue: #3CA4FF;
+  --secondRed: #fe5068;
+  --mainGreen: #c7e591;
+  --mainBlue: #3ca4ff;
 }
-a{
+a {
   text-decoration: none;
   color: var(--mainGreen);
 }
-.container-recipe{
+/* .container-recipe {
   margin: 0 auto;
   width: 414px;
   height: 100vh;
   border: 1px solid black;
-}
-.img-bg-recipe{
+} */
+.img-bg-recipe {
   width: 100%;
   height: 48%;
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  bottom: -399px;
+  left: 0px;
+  z-index: 10;
 }
-.btn-back {
+.button-back {
+  margin: 30px 30px 30px 30px;
+  border: 1px solid #fdcb5f;
+  border-radius: 100px;
+  z-index: 2;
+  width: 25%;
+}
+
+.button-back i {
   text-decoration: none;
-  display: flex;
-  justify-content: start;
-  border: var(--primaryColor) solid 1px;
-  color: var(--mainGreen);
-  width: 20vw;
+  color: #c7e591;
+  position: relative;
+  left: -20px;
+  margin-left: 10px;
+  font-size: 40px;
 }
-.cadre{
+.cadre {
   background-color: var(--primaryColor);
-  width:23em;
-  height: 30em;
+  width: 23em;
+  height: 33em;
   margin: 0 auto;
   border-radius: 20px;
 }
-.photo{
-    background-color: var(--offWhite);
-    width: 19em;
-    height: 19em;
-    margin: 1em 2.3em;
-    padding-top: 1em;
-    position: absolute;
-    border-radius: 2em
-}
-.title{
-  position:absolute;
+.photo {
   background-color: var(--offWhite);
-  margin-top: 21em;
-    margin-left: 2.2em;
-    width: 19em;
-    height: 4em;
-    border-radius: 1em;
-    text-align: start;
+  width: 21em;
+  height: 22em;
+  margin: 1em 4%;
+  padding-top: 1em;
+  position: absolute;
+  border-radius: 10px;
 }
-.title h3,
-.title h4{
-  margin-left: 0.5em;
+.title {
+  position: absolute;
+  background-color: var(--offWhite);
+  padding-top: 10px;
+  margin: 26em 4%;
+  width: 21em;
+  height: 4.5em;
+  border-radius: 1em;
+  text-align: start;
 }
-.imgRecipe{
-  width: 17em;
-  height: 17em;
-  border-radius: 3em;
 
+.title h3 {
+  margin-bottom: 8px;
+  margin-left: 1.7em;
+  font-size: 14px;
+}
+.title h4 {
+  margin-bottom: 8px;
+  margin-left: 1.7em;
+  font-size: 14px;
+}
+.imgRecipe {
+  width: 90%;
+  height: 94%;
+  border-radius: 10px;
+}
+
+.button-swipe {
+  display: flex;
+  justify-content: space-around;
+  z-index: 1;
+}
+
+.button-swipe a {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  margin-top: 1.5em;
+  height: 80px;
+  width: 80px;
+  z-index: 1;
+}
+
+.button-swipe i {
+  margin-top: 21px;
+}
+
+.btn-yes {
+  background-color: var(--mainGreen);
+}
+.btn-nope {
+  background-color: var(--mainRed);
+}
+.btn-recipe {
+  background-color: var(--mainBlue);
+}
+.background {
+  z-index: 3;
 }
 </style>
