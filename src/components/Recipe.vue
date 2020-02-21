@@ -113,26 +113,26 @@ export default {
 }
 .cadre{
   background-color: var(--primaryColor);
-  width:20em;
+  width:23em;
   height: 30em;
   margin: 0 auto;
   border-radius: 20px;
 }
 .photo{
-  background-color: var(--offWhite);
-  width:17em;
-  height: 17em;
-  margin: 1em 1.5em ;
-  padding-top: 1em;
-  position: absolute;
-  border-radius: 2em;
+    background-color: var(--offWhite);
+    width: 19em;
+    height: 19em;
+    margin: 1em 2.3em;
+    padding-top: 1em;
+    position: absolute;
+    border-radius: 2em
 }
 .title{
   position:absolute;
 }
 .imgRecipe{
-  width: 15em;
-  height: 15em;
+  width: 17em;
+  height: 17em;
   border-radius: 3em;
 }
 </style>
