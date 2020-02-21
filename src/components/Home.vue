@@ -14,26 +14,28 @@
     </div>
     <div class="onMange">
       <div class="home-title4">
-        <h1>MANGE </h1>
+        <h1>MANGE</h1>
       </div>
       <div class="home-title5">
-        <h1>? </h1>
+        <h1>?</h1>
       </div>
-   </div>
+    </div>
     <div class="img-bg-home">
-      <a class="button-home" href="#"
-        >ON MANGE ?</a>
+      <a class="button-home" href="#">
+        ON MANGE ?
+        <i class="fas fa-long-arrow-alt-right"></i>
+      </a>
     </div>
     <div class="button-home-border">
-      <a href="#" class=""></a>
+      <a href="#" class></a>
     </div>
 
     <!-- <div
       class="background-image"
       style="background-image: url(@/assets/path_2.png)"
-    ></div> -->
+    ></div>-->
 
-    <img class="img-bg" src="@/assets/path_2.png" alt="background"/>
+    <img class="img-bg" src="@/assets/path_2.png" alt="background" />
   </div>
 </template>
 
@@ -120,8 +122,8 @@ a {
   right: -15px;
 }
 
-.home-title1{
-  font-weight:900;
+.home-title1 {
+  font-weight: 900;
   font-size: 25px;
   display: flex;
   justify-content: start;
@@ -129,49 +131,48 @@ a {
   margin-top: 1em;
 }
 .home-title1 h1 {
-  font-weight:900;
-line-height: 21px
+  font-weight: 900;
+  line-height: 21px;
 }
 
-.home-title2{
+.home-title2 {
   font-size: 25px;
   display: flex;
   justify-content: center;
 }
-.home-title2 h1{
-  font-weight:900;
-
+.home-title2 h1 {
+  font-weight: 900;
 }
 
-.home-title3{
+.home-title3 {
   font-size: 25px;
   display: flex;
   justify-content: start;
   margin-left: 4em;
 }
 .home-title3 h1 {
-  font-weight:100;
+  font-weight: 100;
   line-height: 15px;
 }
 
-.home-title4{
+.home-title4 {
   font-size: 25px;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   margin-left: 4.7em;
 }
 
 .home-title4 h1 {
-  font-weight:900;
+  font-weight: 900;
 }
 
 .home-title5 h1 {
-  font-weight:100;
+  font-weight: 100;
   font-size: 50px;
 }
 
-.onMange{
+.onMange {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 </style>
