@@ -14,6 +14,10 @@
         <li>{{obj.ingredients}} - {{obj.measures}}</li>
       </ul>
     </div>
+    <div class="img-bg-recipes">
+    </div>
+                  <a class="button-like" href="#"
+        >♥️</a>
   </div>
 </template>
 
@@ -116,6 +120,46 @@ export default {
   text-align: left;
   margin-left: 20px;
   margin-top: 10px;
+}
+
+.img-bg-recipes{
+    bottom: -80%;
+    z-index: 2;
+    position: absolute;
+    right: 29%;
+
+}
+.button-recipes{
+  background-image: linear-gradient(
+    73deg,
+    #27292d 0%,
+    #f5cf66 74%,
+    #fdcb5f 98%
+  );
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 15px 90px 15px 50px;
+  color: #ffffff;
+  z-index: 2;
+}
+.button-like{
+    background-image: linear-gradient(
+    73deg,
+    #27292d 0%,
+    #f5cf66 74%,
+    #fdcb5f 98%
+  );
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 40px 10px 40px;
+  color: #ffffff;
+  z-index: 2;
+  text-align: center;
+  align-items: center;
 }
 </style>
 
