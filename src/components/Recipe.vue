@@ -1,7 +1,7 @@
 <template>
   <div class="container-recipe">
     <div class="btn-back">
-      <a href="/">Back</a>
+      <a href="/"><i class="fas fa-long-arrow-alt-left"></i></a>
     </div>
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div class="cadre">
@@ -9,7 +9,8 @@
           <img class="imgRecipe" :src="recipe.strMealThumb" alt />
         </div>
         <div class="title">
-            <p>{{recipe.strMeal}}</p>
+            <h3>{{recipe.strMeal}}</h3>
+            <h4>{{recipe.strArea}}-{{recipe.strCategory}}</h4>
         </div>
       </div>
     </div>
@@ -94,10 +95,14 @@ export default {
   --mainGreen: #C7E591;
   --mainBlue: #3CA4FF;
 }
+a{
+  text-decoration: none;
+  color: var(--mainGreen);
+}
 .container-recipe{
   margin: 0 auto;
   width: 414px;
-  height: 140vh;
+  height: 100vh;
   border: 1px solid black;
 }
 .img-bg-recipe{
@@ -109,7 +114,10 @@ export default {
 .btn-back {
   text-decoration: none;
   display: flex;
-  justify-content: start
+  justify-content: start;
+  border: var(--primaryColor) solid 1px;
+  color: var(--mainGreen);
+  width: 20vh;
 }
 .cadre{
   background-color: var(--primaryColor);
@@ -135,6 +143,11 @@ export default {
     width: 19em;
     height: 4em;
     border-radius: 1em;
+    text-align: start;
+}
+.title h3,
+.title h4{
+  margin-left: 0.5em;
 }
 .imgRecipe{
   width: 17em;
