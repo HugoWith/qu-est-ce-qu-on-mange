@@ -1,7 +1,7 @@
 <template>
   <div class="container-recipe">
     <div class="btn-back">
-      <a href="/"><i class="fas fa-long-arrow-alt-left"></i></a>
+      <a href="/"><font-awesome-icon icon="user-secret" /></a>
     </div>
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div class="cadre">
@@ -117,7 +117,7 @@ a{
   justify-content: start;
   border: var(--primaryColor) solid 1px;
   color: var(--mainGreen);
-  width: 20vh;
+  width: 20vw;
 }
 .cadre{
   background-color: var(--primaryColor);
