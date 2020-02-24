@@ -47,10 +47,10 @@ export default {
         Math.random() * 100 - 50,
         Math.random() * 100 - 50
       );
+    },
+    onThrowout({ target }) {
+      console.log(`Threw out ${target.textContent}!`);
     }
-    // onThrowout({ target, throwout }) {
-    //   console.log(`Threw out ${target.textContent}!`);
-    // }
   }
 };
 </script>
