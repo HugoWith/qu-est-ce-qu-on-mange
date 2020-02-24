@@ -32,9 +32,9 @@ export default {
     };
   },
   methods: {
-    add() {
-      this.cards.push(`${this.cards.length + 1}`);
-    },
+    // add() {
+    //   this.cards.push(`${this.cards.length + 1}`);
+    // },
     remove() {
       this.swing();
       setTimeout(() => {

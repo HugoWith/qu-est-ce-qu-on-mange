@@ -22,13 +22,13 @@
       </div>
     </vue-swing>
     <div class="button-swipe">
-      <a href class="btn-nope">
+      <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
       </a>
       <a href class="btn-recipe">
         <i class="fas fa-book"></i>
       </a>
-      <a href class="btn-yes">
+      <a href class="btn-yes" @click.prevent="add">
         <i class="fas fa-heart"></i>
       </a>
     </div>
@@ -100,9 +100,11 @@ export default {
         });
     },
     add() {
-      this.recipes.push(`${this.recipes.length + 1}`);
+      this.getRecipes();
+      this.recipes.push(`${this.recipes}`);
     },
     remove() {
+      this.getRecipes();
       this.swing();
       setTimeout(() => {
         this.recipes.pop();
@@ -117,7 +119,9 @@ export default {
     },
     onThrowout({ target }) {
       console.log(`Threw out ${target.textContent}!`);
+      console.log(this.recipes);
       console.log(target);
+
       this.getRecipes();
     }
   },
