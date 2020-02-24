@@ -8,6 +8,7 @@
         <i class="fas fa-long-arrow-alt-left"></i>
       </a>
     </div>
+    <div class="cadre2"></div>
     <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
       <div v-for="(recipe, index) in recipes" v-bind:key="index">
         <div class="cadre">
@@ -21,6 +22,7 @@
         </div>
       </div>
     </vue-swing>
+
     <div class="button-swipe">
       <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
@@ -118,8 +120,9 @@ export default {
       );
     },
     onThrowout({ target }) {
+      target();
       console.log(`Threw out ${target.textContent}!`);
-      console.log(this.recipes);
+      // console.log(this.recipes);
       console.log(target);
 
       this.getRecipes();
@@ -187,10 +190,24 @@ a {
   font-size: 40px;
 }
 .cadre {
+  position: relative;
   background-color: var(--primaryColor);
   width: 23em;
   height: 33em;
   margin: 0 auto;
+  border-radius: 20px;
+  z-index: auto;
+}
+
+.cadre2 {
+  position: absolute;
+  z-index: auto;
+  background-color: #c7e591;
+  width: 22em;
+  height: 32em;
+  margin: 0 auto;
+  top: 16%;
+  left: 2%;
   border-radius: 20px;
 }
 .photo {
