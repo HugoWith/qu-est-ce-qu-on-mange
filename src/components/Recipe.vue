@@ -27,9 +27,9 @@
       <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
       </a>
-      <a href class="btn-recipe">
+      <router-link to="/recipes" class="btn-recipe">
         <i class="fas fa-book"></i>
-      </a>
+      </router-link>
       <a href class="btn-yes" @click.prevent="add">
         <i class="fas fa-heart"></i>
       </a>
@@ -118,14 +118,13 @@ export default {
         Math.random() * 100 - 50,
         Math.random() * 100 - 50
       );
+      this.getRecipes();
     },
     onThrowout({ target }) {
       target();
       console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
       console.log(target);
-
-      this.getRecipes();
     }
   },
 

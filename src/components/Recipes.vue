@@ -3,9 +3,9 @@
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
         <div class="button-back">
-          <a href="#" class>
+          <router-link to="/recipe">
             <i class="fas fa-long-arrow-alt-left"></i>
-          </a>
+          </router-link>
         </div>
         <div class="borderImg">
           <img class="imgMeal" :src="recipe.strMealThumb" alt />
