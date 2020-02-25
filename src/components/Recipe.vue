@@ -18,6 +18,8 @@
           <div class="title">
             <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
             <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+
+            <p>{{ mealId}}</p>
           </div>
         </div>
       </div>
@@ -27,7 +29,8 @@
       <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
       </a>
-      <router-link to="/recipes" class="btn-recipe">
+
+      <router-link :to="{ name: 'Recipes', params: { mealId } }" class="btn-recipe">
         <i class="fas fa-book"></i>
       </router-link>
       <a href class="btn-yes" @click.prevent="add">
@@ -50,6 +53,7 @@ export default {
 
   data() {
     return {
+      mealId: null,
       recipes: [],
       loading: false,
       ingredients: [],
@@ -67,6 +71,7 @@ export default {
       }
     };
   },
+
   methods: {
     getRecipes: function() {
       this.loading = true;
@@ -77,6 +82,7 @@ export default {
           // console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
+          console.log(this.recipes);
 
           this.ingredients.push(response.data.meals[0].strIngredient1);
           this.ingredients.push(response.data.meals[0].strIngredient2);
@@ -99,6 +105,9 @@ export default {
           this.measures.push(response.data.meals[0].strMeasure8);
           this.measures.push(response.data.meals[0].strMeasure9);
           this.measures.push(response.data.meals[0].strMeasure10);
+
+          // this.mealId.push(response.data.meals[0].idMeal);
+          this.mealId = response.data.meals[0].idMeal;
         });
     },
     add() {

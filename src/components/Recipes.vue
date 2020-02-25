@@ -34,11 +34,15 @@
 
 <script>
 import axios from "axios";
+// import recipe from "./Recipe";
+
 export default {
   name: "Recipes",
+  props: ["mealId"],
   data() {
     return {
       recipes: [],
+      Id: this.props,
       loading: false,
       ingredients: [],
       measures: [],
@@ -51,7 +55,7 @@ export default {
       this.loading = true;
 
       axios
-        .get("https://www.themealdb.com/api/json/v1/1/random.php")
+        .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.Id}`)
         .then(response => {
           console.log(response.data.meals);
           console.log(response);
