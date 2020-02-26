@@ -18,8 +18,6 @@
           <div class="title">
             <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
             <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
-
-            <p>{{ mealId}}</p>
           </div>
         </div>
       </div>
