@@ -42,7 +42,6 @@ export default {
   data() {
     return {
       recipes: [],
-      Id: this.props,
       loading: false,
       ingredients: [],
       measures: [],
@@ -55,7 +54,9 @@ export default {
       this.loading = true;
 
       axios
-        .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.Id}`)
+        .get(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.mealId}`
+        )
         .then(response => {
           console.log(response.data.meals);
           console.log(response);
