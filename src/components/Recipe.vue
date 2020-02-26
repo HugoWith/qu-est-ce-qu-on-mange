@@ -93,17 +93,6 @@ export default {
           this.ingredients.push(response.data.meals[0].strIngredient9);
           this.ingredients.push(response.data.meals[0].strIngredient10);
 
-          this.measures.push(response.data.meals[0].strMeasure1);
-          this.measures.push(response.data.meals[0].strMeasure2);
-          this.measures.push(response.data.meals[0].strMeasure3);
-          this.measures.push(response.data.meals[0].strMeasure4);
-          this.measures.push(response.data.meals[0].strMeasure5);
-          this.measures.push(response.data.meals[0].strMeasure6);
-          this.measures.push(response.data.meals[0].strMeasure7);
-          this.measures.push(response.data.meals[0].strMeasure8);
-          this.measures.push(response.data.meals[0].strMeasure9);
-          this.measures.push(response.data.meals[0].strMeasure10);
-
           // this.mealId.push(response.data.meals[0].idMeal);
           this.mealId = response.data.meals[0].idMeal;
         });
