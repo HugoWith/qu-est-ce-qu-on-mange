@@ -45,6 +45,7 @@ export default {
   props: ["mealId"],
   data() {
     return {
+      img: null,
       recipes: [],
       loading: false,
       ingredients: [],
@@ -62,7 +63,8 @@ export default {
         title: this.title,
         ingredients: this.ingredients,
         measures: this.measures,
-        instruction: this.instruction
+        instruction: this.instruction,
+        img: this.img
       });
 
       console.log(this.title);
@@ -105,6 +107,7 @@ export default {
 
           this.instruction = response.data.meals[0].strInstructions;
           this.title = response.data.meals[0].strMeal;
+          this.img = response.data.meals[0].strMealThumb;
         });
     }
   },
