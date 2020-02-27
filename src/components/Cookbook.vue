@@ -8,11 +8,11 @@
     <div class="cards-cookbook" v-for="(recipe, index) in cookbooks" :key="index">
       <div class="card-recipe">
         <div class="img-cookbook">
-          <img class="imgMeal" :src="recipe.img" alt />
+          <img class="img-cookbook2" :src="recipe.img" alt />
         </div>
         <div class="text-cookbook">
           <h2>{{recipe.title }}</h2>
-          <p>recipe.id</p>
+          <p>{{ recipe.type }}</p>
         </div>
       </div>
     </div>
@@ -105,6 +105,7 @@ h1 {
 .text-cookbook {
   margin-top: 10px;
   margin-left: 20px;
+  text-align: left;
 }
 
 .cards-cookbook {
@@ -128,5 +129,15 @@ h1 {
   width: 60%;
   margin: 0 auto;
   padding: 5px;
+}
+
+.img-cookbook2 {
+  width: 80px;
+  height: 80px;
+  border: 5px solid white;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin: 5px 20px 5px 10px;
 }
 </style>
