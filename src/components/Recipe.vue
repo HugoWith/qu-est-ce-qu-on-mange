@@ -27,9 +27,10 @@
       <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
       </a>
-      <a href class="btn-recipe">
+
+      <router-link :to="{ name: 'Recipes', params: { mealId } }" class="btn-recipe">
         <i class="fas fa-book"></i>
-      </a>
+      </router-link>
       <a href class="btn-yes" @click.prevent="add">
         <i class="fas fa-heart"></i>
       </a>
@@ -50,6 +51,7 @@ export default {
 
   data() {
     return {
+      mealId: null,
       recipes: [],
       loading: false,
       ingredients: [],
@@ -67,6 +69,7 @@ export default {
       }
     };
   },
+
   methods: {
     getRecipes: function() {
       this.loading = true;
@@ -77,6 +80,7 @@ export default {
           // console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
+          console.log(this.recipes);
 
           this.ingredients.push(response.data.meals[0].strIngredient1);
           this.ingredients.push(response.data.meals[0].strIngredient2);
@@ -89,16 +93,8 @@ export default {
           this.ingredients.push(response.data.meals[0].strIngredient9);
           this.ingredients.push(response.data.meals[0].strIngredient10);
 
-          this.measures.push(response.data.meals[0].strMeasure1);
-          this.measures.push(response.data.meals[0].strMeasure2);
-          this.measures.push(response.data.meals[0].strMeasure3);
-          this.measures.push(response.data.meals[0].strMeasure4);
-          this.measures.push(response.data.meals[0].strMeasure5);
-          this.measures.push(response.data.meals[0].strMeasure6);
-          this.measures.push(response.data.meals[0].strMeasure7);
-          this.measures.push(response.data.meals[0].strMeasure8);
-          this.measures.push(response.data.meals[0].strMeasure9);
-          this.measures.push(response.data.meals[0].strMeasure10);
+          // this.mealId.push(response.data.meals[0].idMeal);
+          this.mealId = response.data.meals[0].idMeal;
         });
     },
     add() {
@@ -118,14 +114,13 @@ export default {
         Math.random() * 100 - 50,
         Math.random() * 100 - 50
       );
+      this.getRecipes();
     },
     onThrowout({ target }) {
       target();
       console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
       console.log(target);
-
-      this.getRecipes();
     }
   },
 

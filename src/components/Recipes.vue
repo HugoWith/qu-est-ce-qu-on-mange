@@ -3,9 +3,9 @@
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
         <div class="button-back">
-          <a href="#" class>
+          <router-link to="/recipe">
             <i class="fas fa-long-arrow-alt-left"></i>
-          </a>
+          </router-link>
         </div>
         <div class="borderImg">
           <img class="imgMeal" :src="recipe.strMealThumb" alt />
@@ -15,27 +15,34 @@
           </div>
           <div>
             <ul v-for="obj in list" v-bind:key="obj.ingredients" class="ingredients-list">
-              <li>{{obj.ingredients}} - {{obj.measures}}</li>
+              <li>{{ obj.ingredients }} - {{ obj.measures }}</li>
             </ul>
           </div>
           <div class="guidelines">
             <h2 class=".guidelines-title">Ce que tu dois faire 👨‍🍳</h2>
           </div>
           <div class="instructions">
-            <p>{{instruction}}</p>
+            <p>{{ instruction }}</p>
             <hr />
           </div>
         </div>
       </div>
     </div>
-    <a class="button-like" href="#">♥️</a>
+    <form action @submit.prevent="addRecipe">
+      <input type="submit" value="👨‍🍳" class="button-like" />
+    </form>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+// import recipe from "./Recipe";
+import db from "@/db/init";
+// import firebase from "firebase";
+
 export default {
   name: "Recipes",
+  props: ["mealId"],
   data() {
     return {
       recipes: [],
@@ -43,15 +50,31 @@ export default {
       ingredients: [],
       measures: [],
       filteredrecipe: [],
-      instruction: null
+      title: null,
+      instruction: null,
+      id: this.mealId
     };
   },
   methods: {
+    addRecipe() {
+      db.collection("cookbook").add({
+        id: this.id,
+        title: this.title,
+        ingredients: this.ingredients,
+        measures: this.measures,
+        instruction: this.instruction
+      });
+
+      console.log(this.title);
+    },
+
     getRecipes: function() {
       this.loading = true;
 
       axios
-        .get("https://www.themealdb.com/api/json/v1/1/random.php")
+        .get(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.mealId}`
+        )
         .then(response => {
           console.log(response.data.meals);
           console.log(response);
@@ -81,6 +104,7 @@ export default {
           this.measures.push(response.data.meals[0].strMeasure10);
 
           this.instruction = response.data.meals[0].strInstructions;
+          this.title = response.data.meals[0].strMeal;
         });
     }
   },
@@ -213,10 +237,3 @@ export default {
   align-items: center;
 }
 </style>
-
-
-
-
-
-
-

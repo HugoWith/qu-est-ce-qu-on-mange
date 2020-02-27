@@ -20,14 +20,15 @@ export default new Router({
       component: Home
     },
     {
-      path: "/recipes",
-      name: "Recipes",
-      component: Recipes
-    },
-    {
       path: "/recipe",
       name: "Recipe",
       component: Recipe
+    },
+    {
+      path: "/recipes/:mealId",
+      name: "Recipes",
+      component: Recipes,
+      props: true
     },
     {
       path: "/swip",
