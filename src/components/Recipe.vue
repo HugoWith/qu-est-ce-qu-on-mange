@@ -35,9 +35,8 @@
         <i class="fas fa-heart"></i>
       </a>
     </div>
-    <div class="background">
-      <img class="img-bg-recipe" src="@/assets/path_2.png" alt="background" />
-    </div>
+
+    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
   </div>
 </template>
 
@@ -51,6 +50,7 @@ export default {
 
   data() {
     return {
+      bgimg: "/bgimg.png",
       mealId: null,
       recipes: [],
       loading: false,
@@ -161,14 +161,7 @@ a {
   height: 100vh;
   border: 1px solid black;
 } */
-.img-bg-recipe {
-  width: 100%;
-  height: 48%;
-  position: absolute;
-  bottom: -399px;
-  left: 0px;
-  z-index: 10;
-}
+
 .button-back {
   margin: 30px 30px 30px 30px;
   border: 1px solid #fdcb5f;
@@ -192,12 +185,12 @@ a {
   height: 33em;
   margin: 0 auto;
   border-radius: 20px;
-  z-index: auto;
+  z-index: 1;
 }
 
 .cadre2 {
   position: absolute;
-  z-index: auto;
+  z-index: 1;
   background-color: #c7e591;
   width: 22em;
   height: 32em;

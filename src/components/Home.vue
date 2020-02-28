@@ -34,8 +34,8 @@
       class="background-image"
       style="background-image: url(@/assets/path_2.png)"
     ></div>-->
-
-    <img class="img-bg" src="@/assets/path_2.png" alt="background" />
+    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
+    <!-- <img class="img-bg" src="@/assets/path_2.png" alt="background" /> -->
   </div>
 </template>
 
@@ -43,7 +43,9 @@
 export default {
   name: "Home",
   data() {
-    return {};
+    return {
+      bgimg: "/bgimg.png"
+    };
   }
 };
 </script>
@@ -111,11 +113,11 @@ h1 {
 }
 
 .img-bg {
-  width: 100%;
-  height: 51%;
-  position: relative;
-  bottom: -115px;
-  z-index: 1;
+  width: 125%;
+  height: 100%;
+  position: fixed;
+  background: no-repeat;
+  z-index: 3;
 }
 
 .img-bg-home {

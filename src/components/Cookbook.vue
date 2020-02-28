@@ -9,7 +9,7 @@
     <div class="cards-cookbook" v-for="(recipe, index) in cookbooks" :key="index">
       <div class="card-recipe">
         <div class="img-cookbook">
-          <router-link :to="{ name: 'Recipes', params: { mealId } }">
+          <router-link :to="{ name: 'Recipes', params: { mealId: recipe.id } }">
             <img class="img-cookbook2" :src="recipe.img" alt />
           </router-link>
         </div>
@@ -25,7 +25,7 @@
       style="background-image: url(@/assets/path_2.png)"
     ></div>-->
 
-    <img class="img-bg" src="@/assets/path_2.png" alt="background" />
+    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
   </div>
 </template>
 
@@ -36,8 +36,8 @@ export default {
   name: "Cookbook",
   data() {
     return {
-      cookbooks: [],
-      mealId: []
+      bgimg: "/bgimg.png",
+      cookbooks: []
     };
   },
   created() {
@@ -47,26 +47,14 @@ export default {
         snapshot.forEach(el => {
           let recipe = el.data();
           console.log(this.mealId);
-          // console.log(el.data());
-          // console.log(recipe.id);
-
-          // console.log(this.mealId);
-          // let id = el.data().id;
-          // console.log(recipe);
-          // recipe.id = el.id;
-
-          //   console.log(el.id);
           this.cookbooks.push(recipe);
         });
-        this.cookbooks.forEach(recipes => {
-          // this.mealId = this.$route.params.recipes.id;
-          this.mealId = recipes.id;
-          console.log(this.mealId);
-        });
+        // this.cookbooks.forEach(recipes => {
+        //   // this.mealId = this.$route.params.recipes.id;
+        //   this.mealId = recipes.id;
+        //   console.log(this.mealId);
+        // });
       });
-  },
-  methods: {
-    getid() {}
   }
 };
 </script>
@@ -93,14 +81,6 @@ h1 {
   border: 1px solid black;
 }
 
-.img-bg {
-  width: 100%;
-  height: 51%;
-  position: relative;
-  bottom: -115px;
-  z-index: 1;
-}
-
 .img-bg-home {
   bottom: 60px;
   z-index: 2;
@@ -112,11 +92,12 @@ h1 {
   width: 90%;
   margin: 0 auto;
   background: #fdcb5f;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 1px 3px 15px rgb(34, 33, 33, 0.6);
   border-radius: 10px;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   color: #000000;
+  z-index: 1;
   display: flex;
 }
 
