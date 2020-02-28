@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       cookbooks: [],
-      mealId: null
+      mealId: []
     };
   },
   created() {
@@ -46,6 +46,7 @@ export default {
       .then(snapshot => {
         snapshot.forEach(el => {
           let recipe = el.data();
+          console.log(this.mealId);
           // console.log(el.data());
           // console.log(recipe.id);
 
@@ -56,21 +57,11 @@ export default {
 
           //   console.log(el.id);
           this.cookbooks.push(recipe);
-          // console.log(this.cookbooks);
-
-          // console.log(this.mealId);
-          // console.log(this.cookbooks);
-          // this.cookbooks.forEach(recipe => {
-          //   // console.log(recipe);
-          // });
         });
         this.cookbooks.forEach(recipes => {
+          // this.mealId = this.$route.params.recipes.id;
           this.mealId = recipes.id;
           console.log(this.mealId);
-          // console.log(recipes);
-          // recipes.forEach(recipe => {
-          //   console.log(recipe);
-          // });
         });
       });
   },
