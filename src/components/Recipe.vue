@@ -95,6 +95,7 @@ export default {
 
           // this.mealId.push(response.data.meals[0].idMeal);
           this.mealId = response.data.meals[0].idMeal;
+          console.log(this.mealId);
         });
     },
     add() {
