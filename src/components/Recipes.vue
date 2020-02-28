@@ -31,6 +31,7 @@
     <form action @submit.prevent="addRecipe">
       <input type="submit" value="👨‍🍳" class="button-like" />
     </form>
+    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
   </div>
 </template>
 
@@ -45,6 +46,7 @@ export default {
   props: ["mealId"],
   data() {
     return {
+      bgimg: "/bgimg.png",
       img: null,
       recipes: [],
       loading: false,
@@ -150,6 +152,7 @@ export default {
   background-color: #fdcb5f;
   border-radius: 10px;
   margin: 10px 10px;
+  z-index: 1;
 }
 
 .borderImg h1 {
