@@ -5,10 +5,13 @@
       <label for>Looking for something ?</label>
       <input type="text" value="Apple" class="input-form" />
     </form>
+
     <div class="cards-cookbook" v-for="(recipe, index) in cookbooks" :key="index">
       <div class="card-recipe">
         <div class="img-cookbook">
-          <img class="img-cookbook2" :src="recipe.img" alt />
+          <router-link :to="{ name: 'Recipes', params: { mealId } }">
+            <img class="img-cookbook2" :src="recipe.img" alt />
+          </router-link>
         </div>
         <div class="text-cookbook">
           <h2>{{recipe.title }}</h2>
@@ -16,6 +19,7 @@
         </div>
       </div>
     </div>
+
     <!-- <div
       class="background-image"
       style="background-image: url(@/assets/path_2.png)"
@@ -32,7 +36,8 @@ export default {
   name: "Cookbook",
   data() {
     return {
-      cookbooks: []
+      cookbooks: [],
+      mealId: []
     };
   },
   created() {
@@ -41,14 +46,27 @@ export default {
       .then(snapshot => {
         snapshot.forEach(el => {
           let recipe = el.data();
-          console.log(recipe);
-          recipe.id = el.id;
+          console.log(this.mealId);
+          // console.log(el.data());
+          // console.log(recipe.id);
+
+          // console.log(this.mealId);
+          // let id = el.data().id;
+          // console.log(recipe);
+          // recipe.id = el.id;
+
           //   console.log(el.id);
           this.cookbooks.push(recipe);
-          //   console.log(el.data(), el.id);
-          console.log(this.cookbooks);
+        });
+        this.cookbooks.forEach(recipes => {
+          // this.mealId = this.$route.params.recipes.id;
+          this.mealId = recipes.id;
+          console.log(this.mealId);
         });
       });
+  },
+  methods: {
+    getid() {}
   }
 };
 </script>
