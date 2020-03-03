@@ -5,6 +5,8 @@ import Recipes from "@/components/Recipes";
 import Recipe from "@/components/Recipe";
 import Swip from "@/components/Swip";
 import Cookbook from "@/components/Cookbook";
+import Signup from "@/components/auth/Signup";
+import Signin from "@/components/auth/Signin";
 // import Signup from "@/components/auth/Signup";
 // import Login from "@/components/auth/Login";
 // import ViewProfile from "@/components/profile/ViewProfile";
@@ -40,6 +42,16 @@ export default new Router({
       path: "/cookbook",
       name: "Cookboo",
       component: Cookbook
+    },
+    {
+      path: "/signup",
+      name: "Signup",
+      component: Signup
+    },
+    {
+      path: "/signin",
+      name: "Signin",
+      component: Signin
     }
   ]
 });

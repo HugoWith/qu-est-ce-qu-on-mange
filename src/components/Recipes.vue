@@ -224,9 +224,10 @@ export default {
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   font-size: 16px;
-  padding: 15px 90px 15px 50px;
+  padding: 12px 80px 12px 80px;
   color: #ffffff;
   z-index: 2;
+  text-align: center;
 }
 .button-like {
   background-image: linear-gradient(
