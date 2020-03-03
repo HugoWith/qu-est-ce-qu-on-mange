@@ -112,13 +112,6 @@ h1 {
   border: 1px solid black;
 }
 
-.img-bg-home {
-  bottom: 60px;
-  z-index: 2;
-  position: absolute;
-  right: -15px;
-}
-
 .card-recipe {
   width: 90%;
   margin: 0 auto;

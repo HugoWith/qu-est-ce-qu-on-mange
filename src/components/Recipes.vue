@@ -63,16 +63,20 @@ export default {
   },
   methods: {
     addRecipe() {
-      db.collection("cookbook").add({
-        id: this.id,
-        title: this.title,
-        ingredients: this.ingredients,
-        measures: this.measures,
-        instruction: this.instruction,
-        img: this.img,
-        type: this.type,
-        user: this.user
-      });
+      db.collection("cookbook")
+        .add({
+          id: this.id,
+          title: this.title,
+          ingredients: this.ingredients,
+          measures: this.measures,
+          instruction: this.instruction,
+          img: this.img,
+          type: this.type,
+          user: this.user
+        })
+        .then(() => {
+          this.$router.push({ name: "Cookboo" });
+        });
 
       console.log(this.title);
     },

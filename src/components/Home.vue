@@ -26,16 +26,11 @@
           ON MANGE ?
           <i class="fas fa-long-arrow-alt-right"></i>
         </a>
+        <div class="button-home-border"></div>
       </div>
-      <div class="button-home-border"></div>
     </router-link>
 
-    <!-- <div
-      class="background-image"
-      style="background-image: url(@/assets/path_2.png)"
-    ></div>-->
     <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
-    <!-- <img class="img-bg" src="@/assets/path_2.png" alt="background" /> -->
   </div>
 </template>
 
@@ -89,27 +84,30 @@ h1 {
     #fdcb5f 98%
   );
   border-radius: 100px;
+  width: 60%;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   font-size: 16px;
   padding: 15px 90px 15px 50px;
   color: #ffffff;
   z-index: 2;
+  /* position: relative; */
 }
 
 .button-home-border {
-  bottom: 55px;
-  position: absolute;
+  bottom: 45px;
+  padding: 25px;
+  position: relative;
   width: 70%;
-  height: 8%;
-  right: -27px;
+  right: -47px;
   z-index: 3;
   border: 1px solid #000000;
   border-radius: 100px;
 }
 
-.fa-arrow {
-  color: black;
+.fa-long-arrow-alt-right {
+  font-size: 28px;
+  margin-left: 20px;
 }
 
 .img-bg {
@@ -117,14 +115,12 @@ h1 {
   height: 100%;
   position: fixed;
   background: no-repeat;
+  background-size: cover;
   z-index: 1;
 }
 
 .img-bg-home {
-  bottom: 60px;
-  z-index: 2;
-  position: absolute;
-  right: -15px;
+  margin-top: 60vh;
 }
 
 .home-title1 {
