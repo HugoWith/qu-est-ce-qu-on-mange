@@ -1,5 +1,5 @@
 <template>
-  <div class="container-recipe">
+  <div class="container">
     <!-- <button @click="add">Add card</button>
     <button @click="remove">Remove card</button>
     <button @click="swing">Swing card</button>-->
@@ -8,7 +8,7 @@
         <i class="fas fa-long-arrow-alt-left"></i>
       </a>
     </div>
-    <div class="cadre2"></div>
+    <!-- <div class="cadre2"></div> -->
     <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
       <div v-for="(recipe, index) in recipes" v-bind:key="index">
         <div class="cadre">
@@ -189,7 +189,7 @@ a {
 }
 
 .cadre2 {
-  position: absolute;
+  position: relative;
   z-index: 1;
   background-color: #c7e591;
   width: 22em;

@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title-cookbook">COOKBOOK</h1>
+    <h2 v-if="feedback">{{ feedback}}</h2>
     <form action class="form-cookbook">
       <label for>Looking for something ?</label>
       <input type="text" value="Apple" class="input-form" />
@@ -14,6 +15,7 @@
           </router-link>
         </div>
         <div class="text-cookbook">
+          <!-- <i @click="deleteRecipe" class="fas fa-times"></i> -->
           <h2>{{recipe.title }}</h2>
           <p>{{ recipe.type }}</p>
         </div>
@@ -32,22 +34,46 @@
 
 <script>
 import db from "@/db/init";
+import firebase from "firebase";
+
 export default {
   name: "Cookbook",
   data() {
     return {
       bgimg: "/bgimg.png",
-      cookbooks: []
+      cookbooks: [],
+      feedback: null
     };
   },
+  methods: {
+    deleteRecipe() {
+      console.log("coucou");
+      db.collection("cookbook")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(el => {
+            let recipe = el.data();
+            console.log(recipe);
+            recipe.delete();
+          });
+        });
+    }
+  },
   created() {
+    //get current user
+
     db.collection("cookbook")
       .get()
       .then(snapshot => {
         snapshot.forEach(el => {
           let recipe = el.data();
-          console.log(this.mealId);
-          this.cookbooks.push(recipe);
+          // console.log(recipe);
+          // console.log(this.mealId);
+          if (recipe.user == firebase.auth().currentUser.uid) {
+            this.cookbooks.push(recipe);
+          } else {
+            null;
+          }
         });
         // this.cookbooks.forEach(recipes => {
         //   // this.mealId = this.$route.params.recipes.id;

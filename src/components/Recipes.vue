@@ -1,5 +1,5 @@
 <template>
-  <div class="container-recipes">
+  <div class="container">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
         <div class="button-back">
@@ -39,6 +39,7 @@
 import axios from "axios";
 // import recipe from "./Recipe";
 import db from "@/db/init";
+import firebase from "firebase";
 // import firebase from "firebase";
 
 export default {
@@ -56,7 +57,8 @@ export default {
       title: null,
       instruction: null,
       id: this.mealId,
-      type: null
+      type: null,
+      user: null
     };
   },
   methods: {
@@ -68,7 +70,8 @@ export default {
         measures: this.measures,
         instruction: this.instruction,
         img: this.img,
-        type: this.type
+        type: this.type,
+        user: this.user
       });
 
       console.log(this.title);
@@ -82,8 +85,8 @@ export default {
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.mealId}`
         )
         .then(response => {
-          console.log(response.data.meals);
-          console.log(response);
+          // console.log(response.data.meals);
+          // console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
 
@@ -116,11 +119,16 @@ export default {
         });
     }
   },
+  mounted() {
+    let user = firebase.auth().currentUser;
+    console.log(user.uid);
+    this.user = user.uid;
+  },
 
   computed: {
     list() {
       let arr = this.ingredients.filter(Boolean);
-      console.log(arr);
+      // console.log(arr);
       return arr.map((itm, i) => {
         return { ingredients: itm, measures: this.measures[i] };
       });
