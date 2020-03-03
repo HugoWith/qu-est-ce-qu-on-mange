@@ -20,15 +20,15 @@
         <h1>?</h1>
       </div>
     </div>
-    <div class="img-bg-home">
-      <a class="button-home" href="#">
-        ON MANGE ?
-        <i class="fas fa-long-arrow-alt-right"></i>
-      </a>
-    </div>
-    <div class="button-home-border">
-      <a href="#" class></a>
-    </div>
+    <router-link to="/recipe">
+      <div class="img-bg-home">
+        <a class="button-home" href="#">
+          ON MANGE ?
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </a>
+      </div>
+      <div class="button-home-border"></div>
+    </router-link>
 
     <!-- <div
       class="background-image"
@@ -117,7 +117,7 @@ h1 {
   height: 100%;
   position: fixed;
   background: no-repeat;
-  z-index: 3;
+  z-index: 1;
 }
 
 .img-bg-home {
