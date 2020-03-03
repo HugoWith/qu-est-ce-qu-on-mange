@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <div class="button-back">
+      <router-link to="/recipe">
+        <i class="fas fa-long-arrow-alt-left"></i>
+      </router-link>
+    </div>
     <h1 class="title-cookbook">COOKBOOK</h1>
     <h2 v-if="feedback">{{ feedback}}</h2>
     <form action class="form-cookbook">
