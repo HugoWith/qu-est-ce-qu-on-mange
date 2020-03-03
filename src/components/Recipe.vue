@@ -3,10 +3,15 @@
     <!-- <button @click="add">Add card</button>
     <button @click="remove">Remove card</button>
     <button @click="swing">Swing card</button>-->
-    <div class="button-back">
-      <a href="/" class>
-        <i class="fas fa-long-arrow-alt-left"></i>
-      </a>
+    <div class="navbar">
+      <div class="button-back">
+        <router-link to="/">
+          <i class="fas fa-long-arrow-alt-left"></i>
+        </router-link>
+      </div>
+      <div class="avatar-small">
+        <router-link :to="{ name: 'userAccount', params: { userId } }">👨‍🍳</router-link>
+      </div>
     </div>
     <!-- <div class="cadre2"></div> -->
     <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
@@ -43,6 +48,8 @@
 <script>
 import axios from "axios";
 import VueSwing from "vue-swing";
+// import db from "@/db/init";
+import firebase from "firebase";
 
 export default {
   name: "Recipes",
@@ -52,6 +59,7 @@ export default {
     return {
       bgimg: "/bgimg.png",
       mealId: null,
+      userId: null,
       recipes: [],
       loading: false,
       ingredients: [],
@@ -135,6 +143,12 @@ export default {
     }
   },
 
+  created() {
+    let user = firebase.auth().currentUser;
+    console.log(user);
+    // this.userId = user.uid;
+  },
+
   beforeMount() {
     this.getRecipes();
   }
@@ -161,6 +175,19 @@ a {
   height: 100vh;
   border: 1px solid black;
 } */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.avatar-small {
+  margin: 30px 30px 30px 30px;
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid #fdcb5f;
+  border-radius: 50%;
+}
 
 .button-back {
   margin: 30px 30px 30px 30px;

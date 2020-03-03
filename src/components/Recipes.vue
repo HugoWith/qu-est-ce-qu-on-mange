@@ -31,7 +31,7 @@
     <form action @submit.prevent="addRecipe">
       <input type="submit" value="👨‍🍳" class="button-like" />
     </form>
-    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
+    <!-- <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div> -->
   </div>
 </template>
 

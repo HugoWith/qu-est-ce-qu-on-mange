@@ -111,12 +111,12 @@ h1 {
 }
 
 .img-bg {
-  width: 125%;
-  height: 100%;
-  position: fixed;
-  background: no-repeat;
+  width: 47%;
+  height: 49%;
+  position: absolute;
+  bottom: 40px;
+  /* background: no-repeat; */
   background-size: cover;
-  z-index: 1;
 }
 
 .img-bg-home {

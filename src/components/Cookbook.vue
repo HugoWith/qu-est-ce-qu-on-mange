@@ -32,7 +32,7 @@
       style="background-image: url(@/assets/path_2.png)"
     ></div>-->
 
-    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
+    <!-- <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div> -->
   </div>
 </template>
 

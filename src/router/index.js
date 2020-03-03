@@ -7,6 +7,7 @@ import Swip from "@/components/Swip";
 import Cookbook from "@/components/Cookbook";
 import Signup from "@/components/auth/Signup";
 import Signin from "@/components/auth/Signin";
+import userAccount from "@/components/profile/userAccount";
 // import Signup from "@/components/auth/Signup";
 // import Login from "@/components/auth/Login";
 // import ViewProfile from "@/components/profile/ViewProfile";
@@ -52,6 +53,11 @@ export default new Router({
       path: "/signin",
       name: "Signin",
       component: Signin
+    },
+    {
+      path: "/profile/:userId",
+      name: "userAccount",
+      component: userAccount
     }
   ]
 });
