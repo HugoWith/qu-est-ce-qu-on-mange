@@ -36,19 +36,21 @@
       <router-link :to="{ name: 'Recipes', params: { mealId } }" class="btn-recipe">
         <i class="fas fa-book"></i>
       </router-link>
-      <a href class="btn-yes" @click.prevent="add">
-        <i class="fas fa-heart"></i>
-      </a>
+      <form @submit.prevent="addRecipe">
+        <button class="btn-yes">
+          <i class="fas fa-heart" id="fa-heart"></i>
+        </button>
+      </form>
     </div>
 
-    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
+    <!-- <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div> -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import VueSwing from "vue-swing";
-// import db from "@/db/init";
+import db from "@/db/init";
 import firebase from "firebase";
 
 export default {
@@ -58,13 +60,19 @@ export default {
   data() {
     return {
       bgimg: "/bgimg.png",
-      mealId: null,
+      id: null,
       userId: null,
       recipes: [],
-      loading: false,
       ingredients: [],
       measures: [],
       filteredrecipe: [],
+      img: null,
+      loading: false,
+      title: null,
+      instruction: null,
+      type: null,
+      user: null,
+
       config: {
         allowedDirections: [
           VueSwing.Direction.UP,
@@ -79,6 +87,23 @@ export default {
   },
 
   methods: {
+    addRecipe() {
+      db.collection("cookbook")
+        .add({
+          id: this.mealId,
+          title: this.title,
+          ingredients: this.ingredients,
+          measures: this.measures,
+          instruction: this.instruction,
+          img: this.img,
+          type: this.type,
+          user: this.user
+        })
+        .then(() => {
+          this.getRecipes();
+        });
+    },
+
     getRecipes: function() {
       this.loading = true;
       axios
@@ -88,7 +113,7 @@ export default {
           // console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
-          console.log(this.recipes);
+          // console.log(this.recipes);
 
           this.ingredients.push(response.data.meals[0].strIngredient1);
           this.ingredients.push(response.data.meals[0].strIngredient2);
@@ -103,9 +128,25 @@ export default {
 
           // this.mealId.push(response.data.meals[0].idMeal);
           this.mealId = response.data.meals[0].idMeal;
-          console.log(this.mealId);
+          this.measures.push(response.data.meals[0].strMeasure1);
+          this.measures.push(response.data.meals[0].strMeasure2);
+          this.measures.push(response.data.meals[0].strMeasure3);
+          this.measures.push(response.data.meals[0].strMeasure4);
+          this.measures.push(response.data.meals[0].strMeasure5);
+          this.measures.push(response.data.meals[0].strMeasure6);
+          this.measures.push(response.data.meals[0].strMeasure7);
+          this.measures.push(response.data.meals[0].strMeasure8);
+          this.measures.push(response.data.meals[0].strMeasure9);
+          this.measures.push(response.data.meals[0].strMeasure10);
+
+          this.instruction = response.data.meals[0].strInstructions;
+          this.title = response.data.meals[0].strMeal;
+          this.img = response.data.meals[0].strMealThumb;
+          this.type = response.data.meals[0].strArea;
+          // console.log(this.mealId);
         });
     },
+
     add() {
       this.getRecipes();
       this.recipes.push(`${this.recipes}`);
@@ -127,25 +168,26 @@ export default {
     },
     onThrowout({ target }) {
       target();
-      console.log(`Threw out ${target.textContent}!`);
+      // console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
-      console.log(target);
+      // console.log(target);
     }
   },
 
   computed: {
     list() {
       let arr = this.ingredients.filter(Boolean);
-      console.log(arr);
+      // console.log(arr);
       return arr.map((itm, i) => {
         return { ingredients: itm, measures: this.measures[i] };
       });
     }
   },
 
-  created() {
+  mounted() {
     let user = firebase.auth().currentUser;
-    console.log(user);
+    console.log(user.uid);
+    this.user = user.uid;
     // this.userId = user.uid;
   },
 
@@ -285,6 +327,19 @@ a {
 
 .btn-yes {
   background-color: var(--mainGreen);
+  border: none;
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  margin-top: 1.5em;
+  height: 80px;
+  width: 80px;
+  z-index: 1;
+}
+
+#fa-heart {
+  margin-top: 10px;
 }
 .btn-nope {
   background-color: var(--mainRed);

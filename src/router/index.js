@@ -8,6 +8,7 @@ import Cookbook from "@/components/Cookbook";
 import Signup from "@/components/auth/Signup";
 import Signin from "@/components/auth/Signin";
 import userAccount from "@/components/profile/userAccount";
+// import firebase from "firebase";
 // import Signup from "@/components/auth/Signup";
 // import Login from "@/components/auth/Login";
 // import ViewProfile from "@/components/profile/ViewProfile";
@@ -27,12 +28,18 @@ export default new Router({
       path: "/recipe",
       name: "Recipe",
       component: Recipe
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: "/recipes/:mealId",
       name: "Recipes",
       component: Recipes,
       props: true
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: "/swip",
@@ -43,6 +50,9 @@ export default new Router({
       path: "/cookbook",
       name: "Cookboo",
       component: Cookbook
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: "/signup",
@@ -62,6 +72,22 @@ export default new Router({
   ]
 });
 
+// router.beforeEach((to, from, next) => {
+//   // check to see if route require Auth
+//   if (to.matched.some(rec => rec.meta.requiresAuth)) {
+//     //check if user auth
+//     let user = firebase.auth().currentUser;
+//     if (user) {
+//       next();
+//     } else {
+//       next({ name: "Signin" });
+//     }
+//   } else {
+//     next();
+//   }
+// });
+
+// export default router;
 // {
 //   path: "/signup",
 //   name: "Signup",

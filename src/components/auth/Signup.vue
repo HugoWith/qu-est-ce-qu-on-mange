@@ -59,6 +59,7 @@ export default {
                 ref.set({
                   name: this.name,
                   surname: this.surname,
+                  email: this.email,
                   user_id: cred.user.uid
                 });
               })
