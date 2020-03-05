@@ -1,7 +1,7 @@
 <template>
   <div class="signup container">
     <form @submit.prevent="login" class="card-panel">
-      <h1 class>CONNEXION</h1>
+      <h1 class="title-sign">CONNEXION</h1>
       <div class="field">
         <label class="label-signup" for="email">Email:</label>
         <input class="input-signup" type="email" name="email" v-model="email" />
@@ -15,6 +15,10 @@
         <button class="button-recipes">Let's go 👉</button>
       </div>
     </form>
+    <div class="field-button center">
+      <router-link to="/signup" class="button-signup">Doesn't have an account yet 👉</router-link>
+    </div>
+    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
   </div>
 </template>
 
@@ -28,7 +32,8 @@ export default {
     return {
       email: null,
       password: null,
-      feedback: null
+      feedback: null,
+      bgimg: "/bgimg.png"
     };
   },
   methods: {
@@ -50,3 +55,20 @@ export default {
   }
 };
 </script>
+
+<style>
+.card-panel {
+  margin-top: 50%;
+  z-index: auto;
+}
+
+.button-signup {
+  border: 1px solid #c7e591;
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 12px 80px 12px 80px;
+  color: #000000;
+}
+</style>

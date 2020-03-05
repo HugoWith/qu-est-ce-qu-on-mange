@@ -146,12 +146,6 @@ export default {
 </script>
 
 <style>
-.container-recipes {
-  margin: 0 auto;
-  width: 100%;
-  height: 100vh;
-  border: 1px solid black;
-}
 .imgMeal {
   width: 90%;
   height: 20%;
@@ -227,10 +221,10 @@ export default {
 }
 .button-recipes {
   background-image: linear-gradient(
-    73deg,
-    #27292d 0%,
-    #f5cf66 74%,
-    #fdcb5f 98%
+    60deg,
+    #27292d -80%,
+    #f5cf66 98%,
+    #fdcb5f 100%
   );
   border-radius: 100px;
   font-family: "Open Sans", sans-serif;

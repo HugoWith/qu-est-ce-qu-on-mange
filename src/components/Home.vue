@@ -53,18 +53,24 @@ export default {
   box-sizing: border-box;
 }
 
+html {
+  margin: -60px auto;
+}
+
 a {
   text-decoration: none;
 }
 
 h1 {
+  font-family: "Open Sans", sans-serif;
   color: black;
+  font-weight: bold;
 }
 .container {
   margin: 0 auto;
   max-width: 414px;
   height: 100vh;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .no-idea {
@@ -80,7 +86,7 @@ h1 {
   background-image: linear-gradient(
     73deg,
     #27292d 0%,
-    #f5cf66 74%,
+    #f5cf66 80%,
     #fdcb5f 98%
   );
   border-radius: 100px;
@@ -111,12 +117,13 @@ h1 {
 }
 
 .img-bg {
-  width: 47%;
+  width: 100%;
   height: 49%;
   position: absolute;
   bottom: 40px;
   /* background: no-repeat; */
   background-size: cover;
+  z-index: -10;
 }
 
 .img-bg-home {

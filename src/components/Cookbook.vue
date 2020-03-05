@@ -105,12 +105,6 @@ a {
 h1 {
   color: black;
 }
-.container {
-  margin: 0 auto;
-  width: 414px;
-  height: 100vh;
-  border: 1px solid black;
-}
 
 .card-recipe {
   width: 90%;

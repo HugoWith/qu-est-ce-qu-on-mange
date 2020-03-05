@@ -1,7 +1,7 @@
 <template>
   <div class="signup container">
     <form @submit.prevent="signup" class="card-panel">
-      <h1 class>CONNEXION</h1>
+      <h1 class="title-sign">CONNEXION</h1>
       <div class="field">
         <label class="label-signup" for="name">Name:</label>
         <input class="input-signup" type="text" name="name" v-model="name" />
@@ -23,6 +23,7 @@
         <button class="button-recipes">Let's go 👉</button>
       </div>
     </form>
+    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
   </div>
 </template>
 
@@ -39,7 +40,8 @@ export default {
       password: null,
       name: null,
       surname: null,
-      feedback: null
+      feedback: null,
+      bgimg: "/bgimg.png"
     };
   },
   methods: {
@@ -112,5 +114,10 @@ export default {
 
 .field-button {
   margin-top: 30px;
+}
+
+.title-sign {
+  margin-bottom: 40px;
+  font-weight: bolder;
 }
 </style>

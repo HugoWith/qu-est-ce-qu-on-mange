@@ -9,7 +9,12 @@
           <i class="fas fa-long-arrow-alt-left"></i>
         </router-link>
       </div>
-      <div class="avatar-small">
+      <div class="button-back">
+        <router-link to="/cookbook">
+          <p>📙</p>
+        </router-link>
+      </div>
+      <div class="button-back">
         <router-link :to="{ name: 'userAccount', params: { userId } }">👨‍🍳</router-link>
       </div>
     </div>
@@ -211,15 +216,12 @@ a {
   text-decoration: none;
   color: var(--mainGreen);
 }
-/* .container-recipe {
-  margin: 0 auto;
-  width: 414px;
-  height: 100vh;
-  border: 1px solid black;
-} */
+
 .navbar {
   display: flex;
   justify-content: space-around;
+  text-align: center;
+  align-items: center;
 }
 
 .avatar-small {
@@ -237,22 +239,21 @@ a {
   border-radius: 100px;
   z-index: 2;
   width: 25%;
+  padding: 4px;
 }
 
 .button-back i {
   text-decoration: none;
   color: #c7e591;
-  position: relative;
-  left: -20px;
-  margin-left: 10px;
-  font-size: 40px;
+  margin-left: 15px;
+  font-size: 30px;
 }
 .cadre {
   position: relative;
   background-color: var(--primaryColor);
   width: 23em;
-  height: 33em;
-  margin: 0 auto;
+  height: 22em;
+  margin: -5px auto;
   border-radius: 20px;
   z-index: 1;
 }
@@ -271,7 +272,7 @@ a {
 .photo {
   background-color: var(--offWhite);
   width: 21em;
-  height: 22em;
+  height: 19em;
   margin: 1em 4%;
   padding-top: 1em;
   position: absolute;
@@ -281,7 +282,7 @@ a {
   position: absolute;
   background-color: var(--offWhite);
   padding-top: 10px;
-  margin: 26em 4%;
+  margin: 21em 4%;
   width: 21em;
   height: 4.5em;
   border-radius: 1em;
@@ -299,8 +300,8 @@ a {
   font-size: 14px;
 }
 .imgRecipe {
-  width: 90%;
-  height: 94%;
+  width: 83%;
+  height: 93%;
   border-radius: 10px;
 }
 
@@ -308,6 +309,7 @@ a {
   display: flex;
   justify-content: space-around;
   z-index: 1;
+  margin-top: 70px;
 }
 
 .button-swipe a {
