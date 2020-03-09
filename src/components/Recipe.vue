@@ -103,8 +103,8 @@ export default {
           VueSwing.Direction.LEFT,
           VueSwing.Direction.RIGHT
         ],
-        minThrowOutDistance: 250,
-        maxThrowOutDistance: 300
+        minThrowOutDistance: 50,
+        maxThrowOutDistance: 100
       }
     };
   },
@@ -344,7 +344,7 @@ a {
   display: flex;
   justify-content: space-around;
   z-index: 1;
-  margin-top: 70px;
+  transform: translate(0%, -220%);
 }
 
 .button-swipe a {
@@ -393,10 +393,9 @@ a {
 }
 
 .fixed {
-  position: fixed;
+  position: relative;
+  transform: translate(0%, -98%) rotate(8deg);
+  margin-bottom: 0px;
   z-index: -10;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -65%);
 }
 </style>
