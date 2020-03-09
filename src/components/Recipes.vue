@@ -11,7 +11,7 @@
           <img class="imgMeal" :src="recipe.strMealThumb" alt />
           <h1 class=".recipe-title">{{ recipe.strMeal.toUpperCase() }}</h1>
           <div class="guidelines">
-            <h2 class=".guidelines-title">Ce dont tu as besoin 👇</h2>
+            <h2 class=".guidelines-title">What you need 👇</h2>
           </div>
           <div>
             <ul v-for="obj in list" v-bind:key="obj.ingredients" class="ingredients-list">
@@ -19,7 +19,7 @@
             </ul>
           </div>
           <div class="guidelines">
-            <h2 class=".guidelines-title">Ce que tu dois faire 👨‍🍳</h2>
+            <h2 class=".guidelines-title">What to do 👨‍🍳</h2>
           </div>
           <div class="instructions">
             <p>{{ instruction }}</p>
