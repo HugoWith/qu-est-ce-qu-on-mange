@@ -103,8 +103,8 @@ export default {
           VueSwing.Direction.LEFT,
           VueSwing.Direction.RIGHT
         ],
-        minThrowOutDistance: 10,
-        maxThrowOutDistance: 150,
+        minThrowOutDistance: 100,
+        maxThrowOutDistance: 350,
         isThrowOut: function(xOffset, yOffset, element, throwOutConfidence) {
           return throwOutConfidence > 0.6;
         }
@@ -183,7 +183,7 @@ export default {
       setTimeout(() => {
         this.recipes.pop();
       }, 100);
-      this.getRecipes();
+      // this.getRecipes();
     },
     swing() {
       const recipes = this.$refs.vueswing.recipes;
@@ -192,19 +192,19 @@ export default {
         Math.random() * 100 - 50,
         Math.random() * 100 - 50
       );
-      this.getRecipes();
+      // this.getRecipes();
     },
     onThrowout({ target }) {
       // target();
       setTimeout(() => (this.isVisible = false), 100);
       setTimeout(() => {
         target;
-        this.getRecipes();
+        // this.getRecipes();
         this.isVisible = true;
         if (this.throwoutright) {
           this.addRecipe();
         } else {
-          this.getRecipes();
+          // this.getRecipes();
         }
       }, 100);
 
