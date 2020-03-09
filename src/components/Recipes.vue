@@ -186,14 +186,6 @@ export default {
   margin-top: 10px;
 }
 
-.button-back {
-  margin: 30px 30px 30px 30px;
-  border: 1px solid #fdcb5f;
-  border-radius: 100px;
-  z-index: 1;
-  width: 25%;
-}
-
 .button-back i {
   text-decoration: none;
   color: #c7e591;

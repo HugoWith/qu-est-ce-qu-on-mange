@@ -19,6 +19,7 @@
       </div>
     </div>
     <!-- <div class="cadre2"></div> -->
+
     <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
       <div v-for="(recipe, index) in recipes" v-bind:key="index">
         <div class="cadre">
@@ -33,6 +34,21 @@
       </div>
     </vue-swing>
 
+    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
+      <div class="card2 fixed">
+        <div v-for="(recipe, index) in recipes" v-bind:key="index">
+          <div class="cadre">
+            <div class="photo">
+              <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+            </div>
+            <div class="title">
+              <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+              <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </vue-swing>
     <div class="button-swipe">
       <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
@@ -67,7 +83,7 @@ export default {
       bgimg: "/bgimg.png",
       id: null,
       userId: null,
-      recipes: [],
+      recipes: ["1", "2", "3"],
       ingredients: [],
       measures: [],
       filteredrecipe: [],
@@ -80,8 +96,8 @@ export default {
 
       config: {
         allowedDirections: [
-          VueSwing.Direction.UP,
-          VueSwing.Direction.DOWN,
+          // VueSwing.Direction.UP,
+          // VueSwing.Direction.DOWN,
           VueSwing.Direction.LEFT,
           VueSwing.Direction.RIGHT
         ],
@@ -118,7 +134,8 @@ export default {
           // console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
-          // console.log(this.recipes);
+
+          console.log(this.recipes.index++);
 
           this.ingredients.push(response.data.meals[0].strIngredient1);
           this.ingredients.push(response.data.meals[0].strIngredient2);
@@ -149,22 +166,24 @@ export default {
           this.img = response.data.meals[0].strMealThumb;
           this.type = response.data.meals[0].strArea;
           // console.log(this.mealId);
+
+          this.recipes.index++;
         });
     },
 
     add() {
+      this.recipes.push(`${this.recipes.length + 1}`);
       this.getRecipes();
-      this.recipes.push(`${this.recipes}`);
     },
     remove() {
-      this.getRecipes();
-      this.swing();
       setTimeout(() => {
         this.recipes.pop();
       }, 100);
+      this.getRecipes();
     },
     swing() {
       const recipes = this.$refs.vueswing.recipes;
+
       recipes[recipes.length - 1].throwOut(
         Math.random() * 100 - 50,
         Math.random() * 100 - 50
@@ -172,7 +191,9 @@ export default {
       this.getRecipes();
     },
     onThrowout({ target }) {
-      target();
+      // target();
+      target;
+      this.getRecipes();
       // console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
       // console.log(target);
@@ -186,6 +207,12 @@ export default {
       return arr.map((itm, i) => {
         return { ingredients: itm, measures: this.measures[i] };
       });
+    },
+    current() {
+      return this.recipes[this.index];
+    },
+    next() {
+      return this.recipes[this.index + 1];
     }
   },
 
@@ -351,5 +378,17 @@ a {
 }
 .background {
   z-index: 3;
+}
+
+.card2 {
+  z-index: 1;
+}
+
+.fixed {
+  position: fixed;
+  z-index: -10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -65%);
 }
 </style>
