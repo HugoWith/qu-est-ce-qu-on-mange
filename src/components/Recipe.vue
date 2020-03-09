@@ -105,8 +105,9 @@ export default {
         ],
         minThrowOutDistance: 10,
         maxThrowOutDistance: 150,
-        // throwOutConfidence: 1
-        offset: 300
+        isThrowOut: function(xOffset, yOffset, element, throwOutConfidence) {
+          return throwOutConfidence > 0.5;
+        }
       }
     };
   },
