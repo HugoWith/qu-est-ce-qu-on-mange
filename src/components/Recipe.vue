@@ -20,7 +20,7 @@
     </div>
     <!-- <div class="cadre2"></div> -->
 
-    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
+    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing" v-if="isVisible">
       <div v-for="(recipe, index) in recipes" v-bind:key="index">
         <div class="cadre">
           <div class="photo">
@@ -34,21 +34,20 @@
       </div>
     </vue-swing>
 
-    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
-      <div class="card2 fixed">
-        <div v-for="(recipe, index) in recipes" v-bind:key="index">
-          <div class="cadre">
-            <div class="photo">
-              <img class="imgRecipe" :src="recipe.strMealThumb" alt />
-            </div>
-            <div class="title">
-              <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
-              <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
-            </div>
+    <div class="card2 fixed">
+      <div v-for="(recipe, index) in recipes" v-bind:key="index">
+        <div class="cadre">
+          <div class="photo">
+            <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+          </div>
+          <div class="title">
+            <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+            <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
           </div>
         </div>
       </div>
-    </vue-swing>
+    </div>
+
     <div class="button-swipe">
       <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
@@ -82,8 +81,10 @@ export default {
     return {
       bgimg: "/bgimg.png",
       id: null,
+      isVisible: true,
       userId: null,
-      recipes: ["1", "2", "3"],
+      index: 0,
+      recipes: [],
       ingredients: [],
       measures: [],
       filteredrecipe: [],
@@ -135,8 +136,6 @@ export default {
           this.loading = false;
           this.recipes = response.data.meals;
 
-          console.log(this.recipes.index++);
-
           this.ingredients.push(response.data.meals[0].strIngredient1);
           this.ingredients.push(response.data.meals[0].strIngredient2);
           this.ingredients.push(response.data.meals[0].strIngredient3);
@@ -167,13 +166,13 @@ export default {
           this.type = response.data.meals[0].strArea;
           // console.log(this.mealId);
 
-          this.recipes.index++;
+          console.log(this.recipes);
         });
     },
 
     add() {
-      this.recipes.push(`${this.recipes.length + 1}`);
-      this.getRecipes();
+      // this.recipes.push(`${this.recipes.length + 1}`);
+      // this.getRecipes();
     },
     remove() {
       setTimeout(() => {
@@ -192,8 +191,12 @@ export default {
     },
     onThrowout({ target }) {
       // target();
-      target;
-      this.getRecipes();
+      setTimeout(() => (this.isVisible = false), 100);
+      setTimeout(() => {
+        target;
+        this.getRecipes();
+        this.isVisible = true;
+      }, 100);
       // console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
       // console.log(target);
@@ -210,9 +213,6 @@ export default {
     },
     current() {
       return this.recipes[this.index];
-    },
-    next() {
-      return this.recipes[this.index + 1];
     }
   },
 
