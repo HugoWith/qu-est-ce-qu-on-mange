@@ -1,14 +1,25 @@
 <template>
-  <div class="container-recipe">
+  <div class="container">
     <!-- <button @click="add">Add card</button>
     <button @click="remove">Remove card</button>
     <button @click="swing">Swing card</button>-->
-    <div class="button-back">
-      <a href="/" class>
-        <i class="fas fa-long-arrow-alt-left"></i>
-      </a>
+    <div class="navbar">
+      <div class="button-back">
+        <router-link to="/">
+          <i class="fas fa-long-arrow-alt-left"></i>
+        </router-link>
+      </div>
+      <div class="button-back">
+        <router-link to="/cookbook">
+          <p>📙</p>
+        </router-link>
+      </div>
+      <div class="button-back">
+        <router-link :to="{ name: 'userAccount', params: { userId } }">👨‍🍳</router-link>
+      </div>
     </div>
-    <div class="cadre2"></div>
+    <!-- <div class="cadre2"></div> -->
+
     <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
       <div v-for="(recipe, index) in recipes" v-bind:key="index">
         <div class="cadre">
@@ -23,6 +34,21 @@
       </div>
     </vue-swing>
 
+    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing">
+      <div class="card2 fixed">
+        <div v-for="(recipe, index) in recipes" v-bind:key="index">
+          <div class="cadre">
+            <div class="photo">
+              <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+            </div>
+            <div class="title">
+              <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+              <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </vue-swing>
     <div class="button-swipe">
       <a href class="btn-nope" @click.prevent="remove">
         <i class="fas fa-times"></i>
@@ -31,18 +57,22 @@
       <router-link :to="{ name: 'Recipes', params: { mealId } }" class="btn-recipe">
         <i class="fas fa-book"></i>
       </router-link>
-      <a href class="btn-yes" @click.prevent="add">
-        <i class="fas fa-heart"></i>
-      </a>
+      <form @submit.prevent="addRecipe">
+        <button class="btn-yes">
+          <i class="fas fa-heart" id="fa-heart"></i>
+        </button>
+      </form>
     </div>
 
-    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
+    <!-- <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div> -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import VueSwing from "vue-swing";
+import db from "@/db/init";
+import firebase from "firebase";
 
 export default {
   name: "Recipes",
@@ -51,16 +81,23 @@ export default {
   data() {
     return {
       bgimg: "/bgimg.png",
-      mealId: null,
-      recipes: [],
-      loading: false,
+      id: null,
+      userId: null,
+      recipes: ["1", "2", "3"],
       ingredients: [],
       measures: [],
       filteredrecipe: [],
+      img: null,
+      loading: false,
+      title: null,
+      instruction: null,
+      type: null,
+      user: null,
+
       config: {
         allowedDirections: [
-          VueSwing.Direction.UP,
-          VueSwing.Direction.DOWN,
+          // VueSwing.Direction.UP,
+          // VueSwing.Direction.DOWN,
           VueSwing.Direction.LEFT,
           VueSwing.Direction.RIGHT
         ],
@@ -71,6 +108,23 @@ export default {
   },
 
   methods: {
+    addRecipe() {
+      db.collection("cookbook")
+        .add({
+          id: this.mealId,
+          title: this.title,
+          ingredients: this.ingredients,
+          measures: this.measures,
+          instruction: this.instruction,
+          img: this.img,
+          type: this.type,
+          user: this.user
+        })
+        .then(() => {
+          this.getRecipes();
+        });
+    },
+
     getRecipes: function() {
       this.loading = true;
       axios
@@ -80,7 +134,8 @@ export default {
           // console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
-          console.log(this.recipes);
+
+          console.log(this.recipes.index++);
 
           this.ingredients.push(response.data.meals[0].strIngredient1);
           this.ingredients.push(response.data.meals[0].strIngredient2);
@@ -95,22 +150,40 @@ export default {
 
           // this.mealId.push(response.data.meals[0].idMeal);
           this.mealId = response.data.meals[0].idMeal;
-          console.log(this.mealId);
+          this.measures.push(response.data.meals[0].strMeasure1);
+          this.measures.push(response.data.meals[0].strMeasure2);
+          this.measures.push(response.data.meals[0].strMeasure3);
+          this.measures.push(response.data.meals[0].strMeasure4);
+          this.measures.push(response.data.meals[0].strMeasure5);
+          this.measures.push(response.data.meals[0].strMeasure6);
+          this.measures.push(response.data.meals[0].strMeasure7);
+          this.measures.push(response.data.meals[0].strMeasure8);
+          this.measures.push(response.data.meals[0].strMeasure9);
+          this.measures.push(response.data.meals[0].strMeasure10);
+
+          this.instruction = response.data.meals[0].strInstructions;
+          this.title = response.data.meals[0].strMeal;
+          this.img = response.data.meals[0].strMealThumb;
+          this.type = response.data.meals[0].strArea;
+          // console.log(this.mealId);
+
+          this.recipes.index++;
         });
     },
+
     add() {
+      this.recipes.push(`${this.recipes.length + 1}`);
       this.getRecipes();
-      this.recipes.push(`${this.recipes}`);
     },
     remove() {
-      this.getRecipes();
-      this.swing();
       setTimeout(() => {
         this.recipes.pop();
       }, 100);
+      this.getRecipes();
     },
     swing() {
       const recipes = this.$refs.vueswing.recipes;
+
       recipes[recipes.length - 1].throwOut(
         Math.random() * 100 - 50,
         Math.random() * 100 - 50
@@ -118,21 +191,36 @@ export default {
       this.getRecipes();
     },
     onThrowout({ target }) {
-      target();
-      console.log(`Threw out ${target.textContent}!`);
+      // target();
+      target;
+      this.getRecipes();
+      // console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
-      console.log(target);
+      // console.log(target);
     }
   },
 
   computed: {
     list() {
       let arr = this.ingredients.filter(Boolean);
-      console.log(arr);
+      // console.log(arr);
       return arr.map((itm, i) => {
         return { ingredients: itm, measures: this.measures[i] };
       });
+    },
+    current() {
+      return this.recipes[this.index];
+    },
+    next() {
+      return this.recipes[this.index + 1];
     }
+  },
+
+  mounted() {
+    let user = firebase.auth().currentUser;
+    console.log(user.uid);
+    this.user = user.uid;
+    // this.userId = user.uid;
   },
 
   beforeMount() {
@@ -155,12 +243,22 @@ a {
   text-decoration: none;
   color: var(--mainGreen);
 }
-/* .container-recipe {
-  margin: 0 auto;
-  width: 414px;
-  height: 100vh;
-  border: 1px solid black;
-} */
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+}
+
+.avatar-small {
+  margin: 30px 30px 30px 30px;
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid #fdcb5f;
+  border-radius: 50%;
+}
 
 .button-back {
   margin: 30px 30px 30px 30px;
@@ -168,28 +266,27 @@ a {
   border-radius: 100px;
   z-index: 2;
   width: 25%;
+  padding: 4px;
 }
 
 .button-back i {
   text-decoration: none;
   color: #c7e591;
-  position: relative;
-  left: -20px;
-  margin-left: 10px;
-  font-size: 40px;
+  margin-left: 15px;
+  font-size: 30px;
 }
 .cadre {
   position: relative;
   background-color: var(--primaryColor);
   width: 23em;
-  height: 33em;
-  margin: 0 auto;
+  height: 22em;
+  margin: -5px auto;
   border-radius: 20px;
   z-index: 1;
 }
 
 .cadre2 {
-  position: absolute;
+  position: relative;
   z-index: 1;
   background-color: #c7e591;
   width: 22em;
@@ -202,7 +299,7 @@ a {
 .photo {
   background-color: var(--offWhite);
   width: 21em;
-  height: 22em;
+  height: 19em;
   margin: 1em 4%;
   padding-top: 1em;
   position: absolute;
@@ -212,7 +309,7 @@ a {
   position: absolute;
   background-color: var(--offWhite);
   padding-top: 10px;
-  margin: 26em 4%;
+  margin: 21em 4%;
   width: 21em;
   height: 4.5em;
   border-radius: 1em;
@@ -230,8 +327,8 @@ a {
   font-size: 14px;
 }
 .imgRecipe {
-  width: 90%;
-  height: 94%;
+  width: 83%;
+  height: 93%;
   border-radius: 10px;
 }
 
@@ -239,6 +336,7 @@ a {
   display: flex;
   justify-content: space-around;
   z-index: 1;
+  margin-top: 70px;
 }
 
 .button-swipe a {
@@ -258,6 +356,19 @@ a {
 
 .btn-yes {
   background-color: var(--mainGreen);
+  border: none;
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  margin-top: 1.5em;
+  height: 80px;
+  width: 80px;
+  z-index: 1;
+}
+
+#fa-heart {
+  margin-top: 10px;
 }
 .btn-nope {
   background-color: var(--mainRed);
@@ -267,5 +378,17 @@ a {
 }
 .background {
   z-index: 3;
+}
+
+.card2 {
+  z-index: 1;
+}
+
+.fixed {
+  position: fixed;
+  z-index: -10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -65%);
 }
 </style>

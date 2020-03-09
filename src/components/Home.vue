@@ -20,22 +20,17 @@
         <h1>?</h1>
       </div>
     </div>
-    <div class="img-bg-home">
-      <a class="button-home" href="#">
-        ON MANGE ?
-        <i class="fas fa-long-arrow-alt-right"></i>
-      </a>
-    </div>
-    <div class="button-home-border">
-      <a href="#" class></a>
-    </div>
+    <router-link to="/recipe">
+      <div class="img-bg-home">
+        <a class="button-home" href="#">
+          ON MANGE ?
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </a>
+        <div class="button-home-border"></div>
+      </div>
+    </router-link>
 
-    <!-- <div
-      class="background-image"
-      style="background-image: url(@/assets/path_2.png)"
-    ></div>-->
     <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
-    <!-- <img class="img-bg" src="@/assets/path_2.png" alt="background" /> -->
   </div>
 </template>
 
@@ -58,18 +53,24 @@ export default {
   box-sizing: border-box;
 }
 
+html {
+  margin: -60px auto;
+}
+
 a {
   text-decoration: none;
 }
 
 h1 {
+  font-family: "Open Sans", sans-serif;
   color: black;
+  font-weight: bold;
 }
 .container {
   margin: 0 auto;
-  width: 414px;
+  max-width: 414px;
   height: 100vh;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .no-idea {
@@ -85,46 +86,48 @@ h1 {
   background-image: linear-gradient(
     73deg,
     #27292d 0%,
-    #f5cf66 74%,
+    #f5cf66 80%,
     #fdcb5f 98%
   );
   border-radius: 100px;
+  width: 60%;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   font-size: 16px;
   padding: 15px 90px 15px 50px;
   color: #ffffff;
   z-index: 2;
+  /* position: relative; */
 }
 
 .button-home-border {
-  bottom: 55px;
-  position: absolute;
+  bottom: 45px;
+  padding: 25px;
+  position: relative;
   width: 70%;
-  height: 8%;
-  right: -27px;
+  right: -47px;
   z-index: 3;
   border: 1px solid #000000;
   border-radius: 100px;
 }
 
-.fa-arrow {
-  color: black;
+.fa-long-arrow-alt-right {
+  font-size: 28px;
+  margin-left: 20px;
 }
 
 .img-bg {
-  width: 125%;
-  height: 100%;
-  position: fixed;
-  background: no-repeat;
-  z-index: 3;
+  width: 100%;
+  height: 49%;
+  position: absolute;
+  bottom: 40px;
+  /* background: no-repeat; */
+  background-size: cover;
+  z-index: -10;
 }
 
 .img-bg-home {
-  bottom: 60px;
-  z-index: 2;
-  position: absolute;
-  right: -15px;
+  margin-top: 60vh;
 }
 
 .home-title1 {

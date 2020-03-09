@@ -1,5 +1,5 @@
 <template>
-  <div class="container-recipes">
+  <div class="container">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
         <div class="button-back">
@@ -29,9 +29,9 @@
       </div>
     </div>
     <form action @submit.prevent="addRecipe">
-      <input type="submit" value="👨‍🍳" class="button-like" />
+      <input type="submit" value="Add to my Cookbook 📙" class="button-like" />
     </form>
-    <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div>
+    <!-- <div :style="{ backgroundImage: `url('${bgimg}')` }" class="img-bg"></div> -->
   </div>
 </template>
 
@@ -39,6 +39,7 @@
 import axios from "axios";
 // import recipe from "./Recipe";
 import db from "@/db/init";
+import firebase from "firebase";
 // import firebase from "firebase";
 
 export default {
@@ -56,20 +57,26 @@ export default {
       title: null,
       instruction: null,
       id: this.mealId,
-      type: null
+      type: null,
+      user: null
     };
   },
   methods: {
     addRecipe() {
-      db.collection("cookbook").add({
-        id: this.id,
-        title: this.title,
-        ingredients: this.ingredients,
-        measures: this.measures,
-        instruction: this.instruction,
-        img: this.img,
-        type: this.type
-      });
+      db.collection("cookbook")
+        .add({
+          id: this.id,
+          title: this.title,
+          ingredients: this.ingredients,
+          measures: this.measures,
+          instruction: this.instruction,
+          img: this.img,
+          type: this.type,
+          user: this.user
+        })
+        .then(() => {
+          this.$router.push({ name: "Cookboo" });
+        });
 
       console.log(this.title);
     },
@@ -82,8 +89,8 @@ export default {
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.mealId}`
         )
         .then(response => {
-          console.log(response.data.meals);
-          console.log(response);
+          // console.log(response.data.meals);
+          // console.log(response);
           this.loading = false;
           this.recipes = response.data.meals;
 
@@ -116,11 +123,16 @@ export default {
         });
     }
   },
+  mounted() {
+    let user = firebase.auth().currentUser;
+    console.log(user.uid);
+    this.user = user.uid;
+  },
 
   computed: {
     list() {
       let arr = this.ingredients.filter(Boolean);
-      console.log(arr);
+      // console.log(arr);
       return arr.map((itm, i) => {
         return { ingredients: itm, measures: this.measures[i] };
       });
@@ -134,12 +146,6 @@ export default {
 </script>
 
 <style>
-.container-recipes {
-  margin: 0 auto;
-  width: 100%;
-  height: 100vh;
-  border: 1px solid black;
-}
 .imgMeal {
   width: 90%;
   height: 20%;
@@ -180,14 +186,6 @@ export default {
   margin-top: 10px;
 }
 
-.button-back {
-  margin: 30px 30px 30px 30px;
-  border: 1px solid #fdcb5f;
-  border-radius: 100px;
-  z-index: 1;
-  width: 25%;
-}
-
 .button-back i {
   text-decoration: none;
   color: #c7e591;
@@ -215,18 +213,19 @@ export default {
 }
 .button-recipes {
   background-image: linear-gradient(
-    73deg,
-    #27292d 0%,
-    #f5cf66 74%,
-    #fdcb5f 98%
+    60deg,
+    #27292d -80%,
+    #f5cf66 98%,
+    #fdcb5f 100%
   );
   border-radius: 100px;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   font-size: 16px;
-  padding: 15px 90px 15px 50px;
+  padding: 12px 80px 12px 80px;
   color: #ffffff;
   z-index: 2;
+  text-align: center;
 }
 .button-like {
   background-image: linear-gradient(
