@@ -3,7 +3,7 @@ import Router from "vue-router";
 import Home from "@/components/Home";
 import Recipes from "@/components/Recipes";
 import Recipe from "@/components/Recipe";
-// import Swip from "@/components/Swip";
+import Swip from "@/components/Swip";
 import Cookbook from "@/components/Cookbook";
 import Signup from "@/components/auth/Signup";
 import Signin from "@/components/auth/Signin";
@@ -44,11 +44,11 @@ const router = new Router({
         requiresAuth: true
       }
     },
-    // {
-    //   path: "/swip",
-    //   name: "Swip",
-    //   component: Swip
-    // },
+    {
+      path: "/swip",
+      name: "Swip",
+      component: Swip
+    },
     {
       path: "/cookbook",
       name: "Cookboo",

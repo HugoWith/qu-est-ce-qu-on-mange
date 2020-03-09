@@ -180,14 +180,14 @@ export default {
       // this.getRecipes();
     },
     remove() {
-      setTimeout(() => {
-        this.recipes.pop();
-      }, 100);
-      // this.getRecipes();
+      // setTimeout(() => {
+      //   this.recipes.pop();
+      // }, 100);
+      // this.swing();
+      this.getRecipes();
     },
     swing() {
       const recipes = this.$refs.vueswing.recipes;
-
       recipes[recipes.length - 1].throwOut(
         Math.random() * 100 - 50,
         Math.random() * 100 - 50
