@@ -94,6 +94,7 @@ export default {
       instruction: null,
       type: null,
       user: null,
+      throwoutright: VueSwing.Direction.RIGHT,
 
       config: {
         allowedDirections: [
@@ -124,6 +125,7 @@ export default {
         .then(() => {
           this.getRecipes();
         });
+      console.log("coucou");
     },
 
     getRecipes: function() {
@@ -196,10 +198,16 @@ export default {
         target;
         this.getRecipes();
         this.isVisible = true;
+        if (this.throwoutright) {
+          this.addRecipe();
+        } else {
+          this.getRecipes();
+        }
       }, 100);
+
       // console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
-      // console.log(target);
+      console.log(target);
     }
   },
 
