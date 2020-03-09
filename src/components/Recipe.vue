@@ -103,8 +103,10 @@ export default {
           VueSwing.Direction.LEFT,
           VueSwing.Direction.RIGHT
         ],
-        minThrowOutDistance: 50,
-        maxThrowOutDistance: 100
+        minThrowOutDistance: 10,
+        maxThrowOutDistance: 150,
+        // throwOutConfidence: 1
+        offset: 300
       }
     };
   },
