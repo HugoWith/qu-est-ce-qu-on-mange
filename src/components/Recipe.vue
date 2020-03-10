@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page">
     <!-- <button @click="add">Add card</button>
     <button @click="remove">Remove card</button>
     <button @click="swing">Swing card</button>-->
@@ -21,17 +21,21 @@
     <!-- <div class="cadre2"></div> -->
 
     <vue-swing @throwout="onThrowout" :config="config" ref="vueswing" v-if="isVisible">
-      <div v-for="(recipe, index) in recipes" v-bind:key="index">
-        <div class="cadre">
-          <div class="photo">
-            <img class="imgRecipe" :src="recipe.strMealThumb" alt />
-          </div>
-          <div class="title">
-            <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
-            <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
-          </div>
+      <transition name="animated-card">
+        <div v-for="(recipe, index) in recipes" v-bind:key="index" v-show="showRemove">
+          <transition name="animated-right">
+            <div class="cadre" v-if="showAdd">
+              <div class="photo">
+                <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+              </div>
+              <div class="title">
+                <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+                <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+              </div>
+            </div>
+          </transition>
         </div>
-      </div>
+      </transition>
     </vue-swing>
 
     <div class="card2 fixed">
@@ -80,6 +84,8 @@ export default {
   data() {
     return {
       bgimg: "/bgimg.png",
+      showRemove: true,
+      showAdd: true,
       id: null,
       isVisible: true,
       userId: null,
@@ -103,8 +109,11 @@ export default {
           VueSwing.Direction.LEFT,
           VueSwing.Direction.RIGHT
         ],
-        minThrowOutDistance: 250,
-        maxThrowOutDistance: 300
+        minThrowOutDistance: 100,
+        maxThrowOutDistance: 350,
+        isThrowOut: function(xOffset, yOffset, element, throwOutConfidence) {
+          return throwOutConfidence > 0.6;
+        }
       }
     };
   },
@@ -123,7 +132,7 @@ export default {
           user: this.user
         })
         .then(() => {
-          this.getRecipes();
+          this.add();
         });
       console.log("coucou");
     },
@@ -173,41 +182,36 @@ export default {
     },
 
     add() {
-      // this.recipes.push(`${this.recipes.length + 1}`);
-      // this.getRecipes();
+      this.getRecipes();
+      this.showAdd = false;
+      setTimeout(() => (this.showAdd = true), 500, this.getRecipes());
     },
     remove() {
-      setTimeout(() => {
-        this.recipes.pop();
-      }, 100);
       this.getRecipes();
+      this.showRemove = false;
+      setTimeout(() => (this.showRemove = true), 500, this.getRecipes());
     },
-    swing() {
-      const recipes = this.$refs.vueswing.recipes;
 
-      recipes[recipes.length - 1].throwOut(
-        Math.random() * 100 - 50,
-        Math.random() * 100 - 50
-      );
-      this.getRecipes();
-    },
     onThrowout({ target }) {
-      // target();
+      let el = target.throwoutright;
+      console.log(el);
+      console.log(this.throwoutright);
       setTimeout(() => (this.isVisible = false), 100);
       setTimeout(() => {
-        target;
-        this.getRecipes();
         this.isVisible = true;
-        if (this.throwoutright) {
+
+        if (el != false) {
+          console.log(this.throwoutright);
           this.addRecipe();
+          console.log("if");
         } else {
-          this.getRecipes();
+          this.remove();
+          console.log("else");
         }
       }, 100);
 
       // console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
-      console.log(target);
     }
   },
 
@@ -238,6 +242,8 @@ export default {
 </script>
 
 <style>
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css";
+
 :root {
   --primaryColor: #fdcb5f;
   --mainRed: #ff8c8c;
@@ -344,7 +350,7 @@ a {
   display: flex;
   justify-content: space-around;
   z-index: 1;
-  margin-top: 70px;
+  transform: translate(0%, -220%);
 }
 
 .button-swipe a {
@@ -393,10 +399,37 @@ a {
 }
 
 .fixed {
-  position: fixed;
+  position: relative;
+  transform: translate(0%, -98%) rotate(8deg);
+  margin-bottom: 0px;
   z-index: -10;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -65%);
+}
+
+.animated-card-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.animated-card-leave-to {
+  transform: translateX(-100px) rotateZ(-90deg);
+  opacity: 0;
+}
+
+.animated-card-leave {
+  transform: translateX(0px) rotateZ(0deg);
+  opacity: 1;
+}
+
+.animated-right-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.animated-right-leave-to {
+  transform: translateX(100px) rotateZ(90deg);
+  opacity: 0;
+}
+
+.animated-right-leave {
+  transform: translateX(0px) rotateZ(0deg);
+  opacity: 1;
 }
 </style>

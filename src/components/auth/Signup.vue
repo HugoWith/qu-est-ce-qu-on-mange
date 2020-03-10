@@ -1,5 +1,5 @@
 <template>
-  <div class="signup container">
+  <div class="signup container page">
     <form @submit.prevent="signup" class="card-panel">
       <h1 class="title-sign">CONNEXION</h1>
       <div class="field">

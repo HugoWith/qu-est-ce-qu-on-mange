@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page">
     <h1>MY DETAILS</h1>
     <div class="avatar">
       <img src="../../assets/orange.jpg" alt="photo account" class="img-account" />

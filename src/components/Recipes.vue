@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
         <div class="button-back">

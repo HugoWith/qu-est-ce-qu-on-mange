@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page">
     <div class="no-idea">
       <p>pas d'idée</p>
     </div>
@@ -67,7 +67,9 @@ h1 {
   font-weight: bold;
 }
 .container {
-  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
   max-width: 414px;
   height: 100vh;
   /* border: 1px solid black; */
