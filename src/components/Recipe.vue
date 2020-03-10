@@ -19,6 +19,7 @@
       </div>
     </div>
     <!-- <div class="cadre2"></div> -->
+
     <transition name="animated-card">
       <vue-swing
         @throwout="onThrowout"
@@ -28,15 +29,17 @@
         v-show="showRemove"
       >
         <div v-for="(recipe, index) in recipes" v-bind:key="index">
-          <div class="cadre">
-            <div class="photo">
-              <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+          <transition name="animated-right">
+            <div class="cadre" v-show="showAdd">
+              <div class="photo">
+                <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+              </div>
+              <div class="title">
+                <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+                <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+              </div>
             </div>
-            <div class="title">
-              <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
-              <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
-            </div>
-          </div>
+          </transition>
         </div>
       </vue-swing>
     </transition>
@@ -136,6 +139,8 @@ export default {
         })
         .then(() => {
           this.getRecipes();
+          this.showAdd = false;
+          setTimeout(() => (this.showAdd = true), 500, this.getRecipes());
         });
       console.log("coucou");
     },
@@ -190,8 +195,8 @@ export default {
     },
     remove() {
       this.getRecipes();
-      this.show = false;
-      setTimeout(() => (this.show = true), 500, this.getRecipes());
+      this.showRemove = false;
+      setTimeout(() => (this.showRemove = true), 500, this.getRecipes());
     },
     swing() {
       const recipes = this.$refs.vueswing.recipes;
@@ -418,11 +423,27 @@ a {
 
 .animated-card-enter,
 .animated-card-leave-to {
-  transform: translateX(-100px) rotateZ(90deg);
+  transform: translateX(-100px) rotateZ(-90deg);
   opacity: 0;
 }
 .animated-card-enter-to,
 .animated-card-leave {
+  transform: translateX(0px) rotateZ(0deg);
+  opacity: 1;
+}
+
+.animated-right-enter-active,
+.animated-right-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.animated-right-enter,
+.animated-right-leave-to {
+  transform: translateX(100px) rotateZ(90deg);
+  opacity: 0;
+}
+.animated-right-enter-to,
+.animated-right-leave {
   transform: translateX(0px) rotateZ(0deg);
   opacity: 1;
 }
