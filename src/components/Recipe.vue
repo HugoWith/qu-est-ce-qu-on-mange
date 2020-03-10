@@ -20,17 +20,11 @@
     </div>
     <!-- <div class="cadre2"></div> -->
 
-    <transition name="animated-card">
-      <vue-swing
-        @throwout="onThrowout"
-        :config="config"
-        ref="vueswing"
-        v-if="isVisible"
-        v-show="showRemove"
-      >
-        <div v-for="(recipe, index) in recipes" v-bind:key="index">
+    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing" v-if="isVisible">
+      <transition name="animated-card">
+        <div v-for="(recipe, index) in recipes" v-bind:key="index" v-show="showRemove">
           <transition name="animated-right">
-            <div class="cadre" v-show="showAdd">
+            <div class="cadre" v-if="showAdd">
               <div class="photo">
                 <img class="imgRecipe" :src="recipe.strMealThumb" alt />
               </div>
@@ -41,8 +35,8 @@
             </div>
           </transition>
         </div>
-      </vue-swing>
-    </transition>
+      </transition>
+    </vue-swing>
 
     <div class="card2 fixed">
       <div v-for="(recipe, index) in recipes" v-bind:key="index">
@@ -199,21 +193,25 @@ export default {
     },
 
     onThrowout({ target }) {
-      // target();
+      let el = target.throwoutright;
+      console.log(el);
+      console.log(this.throwoutright);
       setTimeout(() => (this.isVisible = false), 100);
       setTimeout(() => {
-        target;
         this.isVisible = true;
-        if (this.throwoutright) {
+
+        if (el != false) {
+          console.log(this.throwoutright);
           this.addRecipe();
+          console.log("if");
         } else {
           this.remove();
+          console.log("else");
         }
       }, 100);
 
       // console.log(`Threw out ${target.textContent}!`);
       // console.log(this.recipes);
-      console.log(target);
     }
   },
 
