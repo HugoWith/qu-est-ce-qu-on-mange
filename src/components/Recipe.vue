@@ -20,7 +20,13 @@
     </div>
     <!-- <div class="cadre2"></div> -->
 
-    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing" v-if="isVisible">
+    <vue-swing
+      @throwout="onThrowout"
+      :config="config"
+      ref="vueswing"
+      v-if="isVisible"
+      @throwoutright="throwoutright"
+    >
       <transition name="animated-card">
         <div v-for="(recipe, index) in recipes" v-bind:key="index" v-show="showRemove">
           <transition name="animated-right">
@@ -100,6 +106,7 @@ export default {
       instruction: null,
       type: null,
       user: null,
+
       throwoutright: VueSwing.Direction.RIGHT,
 
       config: {
@@ -192,21 +199,17 @@ export default {
       setTimeout(() => (this.showRemove = true), 500, this.getRecipes());
     },
 
-    onThrowout({ target }) {
-      let el = target.throwoutright;
-      console.log(el);
-      console.log(this.throwoutright);
+    onThrowout({ throwDirection }) {
+      console.log(throwDirection);
       setTimeout(() => (this.isVisible = false), 100);
       setTimeout(() => {
         this.isVisible = true;
-
-        if (el != false) {
-          console.log(this.throwoutright);
-          this.addRecipe();
+        if (throwDirection == this.throwoutright) {
           console.log("if");
+          this.addRecipe();
         } else {
-          this.remove();
           console.log("else");
+          this.remove();
         }
       }, 100);
 
