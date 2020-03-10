@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page">
     <div class="button-back">
       <router-link to="/recipe">
         <i class="fas fa-long-arrow-alt-left"></i>

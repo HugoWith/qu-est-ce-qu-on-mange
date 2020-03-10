@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page">
     <!-- <button @click="add">Add card</button>
     <button @click="remove">Remove card</button>
     <button @click="swing">Swing card</button>-->
@@ -19,20 +19,27 @@
       </div>
     </div>
     <!-- <div class="cadre2"></div> -->
-
-    <vue-swing @throwout="onThrowout" :config="config" ref="vueswing" v-if="isVisible">
-      <div v-for="(recipe, index) in recipes" v-bind:key="index">
-        <div class="cadre">
-          <div class="photo">
-            <img class="imgRecipe" :src="recipe.strMealThumb" alt />
-          </div>
-          <div class="title">
-            <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
-            <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+    <transition name="animated-card">
+      <vue-swing
+        @throwout="onThrowout"
+        :config="config"
+        ref="vueswing"
+        v-if="isVisible"
+        v-show="showRemove"
+      >
+        <div v-for="(recipe, index) in recipes" v-bind:key="index">
+          <div class="cadre">
+            <div class="photo">
+              <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+            </div>
+            <div class="title">
+              <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+              <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+            </div>
           </div>
         </div>
-      </div>
-    </vue-swing>
+      </vue-swing>
+    </transition>
 
     <div class="card2 fixed">
       <div v-for="(recipe, index) in recipes" v-bind:key="index">
@@ -80,6 +87,8 @@ export default {
   data() {
     return {
       bgimg: "/bgimg.png",
+      showRemove: true,
+      showAdd: true,
       id: null,
       isVisible: true,
       userId: null,
@@ -180,11 +189,9 @@ export default {
       // this.getRecipes();
     },
     remove() {
-      // setTimeout(() => {
-      //   this.recipes.pop();
-      // }, 100);
-      // this.swing();
       this.getRecipes();
+      this.show = false;
+      setTimeout(() => (this.show = true), 500, this.getRecipes());
     },
     swing() {
       const recipes = this.$refs.vueswing.recipes;
@@ -241,6 +248,8 @@ export default {
 </script>
 
 <style>
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css";
+
 :root {
   --primaryColor: #fdcb5f;
   --mainRed: #ff8c8c;
@@ -400,5 +409,21 @@ a {
   transform: translate(0%, -98%) rotate(8deg);
   margin-bottom: 0px;
   z-index: -10;
+}
+
+.animated-card-enter-active,
+.animated-card-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.animated-card-enter,
+.animated-card-leave-to {
+  transform: translateX(-100px) rotateZ(90deg);
+  opacity: 0;
+}
+.animated-card-enter-to,
+.animated-card-leave {
+  transform: translateX(0px) rotateZ(0deg);
+  opacity: 1;
 }
 </style>
