@@ -24,6 +24,7 @@
           <h2>{{recipe.title }}</h2>
           <p>{{ recipe.type }}</p>
         </div>
+        <i class="fas fa-heart-broken"></i>
       </div>
     </div>
 
