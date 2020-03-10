@@ -138,9 +138,7 @@ export default {
           user: this.user
         })
         .then(() => {
-          this.getRecipes();
-          this.showAdd = false;
-          setTimeout(() => (this.showAdd = true), 500, this.getRecipes());
+          this.add();
         });
       console.log("coucou");
     },
@@ -190,33 +188,26 @@ export default {
     },
 
     add() {
-      // this.recipes.push(`${this.recipes.length + 1}`);
-      // this.getRecipes();
+      this.getRecipes();
+      this.showAdd = false;
+      setTimeout(() => (this.showAdd = true), 500, this.getRecipes());
     },
     remove() {
       this.getRecipes();
       this.showRemove = false;
       setTimeout(() => (this.showRemove = true), 500, this.getRecipes());
     },
-    swing() {
-      const recipes = this.$refs.vueswing.recipes;
-      recipes[recipes.length - 1].throwOut(
-        Math.random() * 100 - 50,
-        Math.random() * 100 - 50
-      );
-      // this.getRecipes();
-    },
+
     onThrowout({ target }) {
       // target();
       setTimeout(() => (this.isVisible = false), 100);
       setTimeout(() => {
         target;
-        // this.getRecipes();
         this.isVisible = true;
         if (this.throwoutright) {
           this.addRecipe();
         } else {
-          // this.getRecipes();
+          this.remove();
         }
       }, 100);
 
@@ -416,33 +407,29 @@ a {
   z-index: -10;
 }
 
-.animated-card-enter-active,
 .animated-card-leave-active {
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-.animated-card-enter,
 .animated-card-leave-to {
   transform: translateX(-100px) rotateZ(-90deg);
   opacity: 0;
 }
-.animated-card-enter-to,
+
 .animated-card-leave {
   transform: translateX(0px) rotateZ(0deg);
   opacity: 1;
 }
 
-.animated-right-enter-active,
 .animated-right-leave-active {
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-.animated-right-enter,
 .animated-right-leave-to {
   transform: translateX(100px) rotateZ(90deg);
   opacity: 0;
 }
-.animated-right-enter-to,
+
 .animated-right-leave {
   transform: translateX(0px) rotateZ(0deg);
   opacity: 1;
