@@ -1,21 +1,26 @@
 <template>
   <div class="container page">
     <div class="no-idea">
-      <p>pas d'idée</p>
+      <p>No clue ?</p>
     </div>
+
     <div class="home-title1">
-      <h1>QU'EST</h1>
+      <h1>WHAT</h1>
     </div>
+
     <div class="home-title2">
-      <h1>CE</h1>
+      <h1>ARE WE</h1>
     </div>
+
     <div class="home-title3">
-      <h1 class="h1-light">QU'ON</h1>
+      <h1 class="h1-light">EATING</h1>
     </div>
+
     <div class="onMange">
       <div class="home-title4">
-        <h1>MANGE</h1>
+        <h1>TONIGHT</h1>
       </div>
+
       <div class="home-title5">
         <h1>?</h1>
       </div>
@@ -23,7 +28,7 @@
     <router-link to="/recipe">
       <div class="img-bg-home">
         <a class="button-home" href="#">
-          ON MANGE ?
+          LET'S EAT ?
           <i class="fas fa-long-arrow-alt-right"></i>
         </a>
         <div class="button-home-border"></div>

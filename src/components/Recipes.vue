@@ -2,10 +2,20 @@
   <div class="container page">
     <div v-for="(recipe, index) in recipes" v-bind:key="index">
       <div>
-        <div class="button-back">
-          <router-link to="/recipe">
-            <i class="fas fa-long-arrow-alt-left"></i>
-          </router-link>
+        <div class="navbar">
+          <div class="button-back">
+            <router-link to="/">
+              <i class="fas fa-long-arrow-alt-left"></i>
+            </router-link>
+          </div>
+          <div class="button-back">
+            <router-link to="/cookbook">
+              <p>📙</p>
+            </router-link>
+          </div>
+          <div class="button-back">
+            <router-link :to="{ name: 'userAccount', params: { userId } }">👨‍🍳</router-link>
+          </div>
         </div>
         <div class="borderImg">
           <img class="imgMeal" :src="recipe.strMealThumb" alt />
@@ -13,18 +23,29 @@
           <div class="guidelines">
             <h2 class=".guidelines-title">What you need 👇</h2>
           </div>
-          <div>
+
+          <div class="cards-ing">
             <ul v-for="obj in list" v-bind:key="obj.ingredients" class="ingredients-list">
-              <li>{{ obj.ingredients }} - {{ obj.measures }}</li>
+              <li>
+                <strong>{{ obj.ingredients }}</strong>
+                <br />
+                <span class="measures-text">
+                  <em>{{ obj.measures }}</em>
+                </span>
+              </li>
             </ul>
           </div>
+
           <div class="guidelines">
             <h2 class=".guidelines-title">What to do 👨‍🍳</h2>
           </div>
-          <div class="instructions">
+          <div class="instructions" v-if="isVisible">
             <p>{{ instruction }}</p>
             <hr />
           </div>
+          <button class="button-instruction" v-on:click="isVisible = !isVisible">
+            <i class="fas fa-chevron-down"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -58,7 +79,8 @@ export default {
       instruction: null,
       id: this.mealId,
       type: null,
-      user: null
+      user: null,
+      isVisible: false
     };
   },
   methods: {
@@ -180,10 +202,18 @@ export default {
 .ingredients-list li {
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
+  font-size: 14px;
   list-style: none;
-  text-align: left;
-  margin-left: 20px;
-  margin-top: 10px;
+  text-align: center;
+  margin: 5px 5px;
+  color: black;
+}
+
+.ingredients-list {
+  /* background-color: #fcfcfc; */
+  /* border: 1px solid grey; */
+  border-radius: 20px;
+  background-color: white;
 }
 
 .button-back i {
@@ -201,8 +231,9 @@ export default {
   margin: 15px 5px 30px 5px;
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
-  font-size: 10px;
-  line-height: 15px;
+  font-size: 15px;
+
+  line-height: 25px;
 }
 
 .img-bg-recipes {
@@ -243,5 +274,32 @@ export default {
   z-index: 2;
   text-align: center;
   align-items: center;
+}
+
+.cards-ing {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.measures-text {
+  font-size: 12px;
+}
+
+.button-instruction {
+  width: 15%;
+  height: 30px;
+  margin-bottom: 10px;
+  background-image: linear-gradient(
+    73deg,
+    #27292d -7%,
+    #f5cf66 42%,
+    #fdcb5f 22%
+  );
+  border-radius: 20px;
+  border: 1px solid grey;
 }
 </style>

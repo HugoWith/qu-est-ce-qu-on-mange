@@ -7,10 +7,10 @@
     </div>
     <h1 class="title-cookbook">COOKBOOK</h1>
     <h2 v-if="feedback">{{ feedback}}</h2>
-    <form action class="form-cookbook" prevent.default>
-      <label for>Looking for something ?</label>
-      <input type="text" v-model="search" value="Apple" class="input-form" />
-    </form>
+    <!-- <form action class="form-cookbook" prevent.default> -->
+    <label for>Looking for something ?</label>
+    <input type="text" v-model="search" value="Apple" class="input-form" />
+    <!-- </form> -->
 
     <div class="cards-cookbook" v-for="(recipe, index) in filteredCookbook" :key="index">
       <div class="card-recipe">
@@ -117,7 +117,7 @@ export default {
   computed: {
     filteredCookbook() {
       return this.cookbooks.filter(recipe => {
-        return recipe.title.toLowerCase().match(this.search);
+        return recipe.title.toLowerCase().match(this.search.toLowerCase());
       });
     }
   }

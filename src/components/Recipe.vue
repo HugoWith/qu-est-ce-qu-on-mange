@@ -31,13 +31,15 @@
         <div v-for="(recipe, index) in recipes" v-bind:key="index" v-show="showRemove">
           <transition name="animated-right">
             <div class="cadre" v-if="showAdd">
-              <div class="photo">
-                <img class="imgRecipe" :src="recipe.strMealThumb" alt />
-              </div>
-              <div class="title">
-                <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
-                <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
-              </div>
+              <router-link :to="{ name: 'Recipes', params: { mealId } }">
+                <div class="photo">
+                  <img class="imgRecipe" :src="recipe.strMealThumb" alt />
+                </div>
+                <div class="title">
+                  <h3>{{ recipe.strMeal.toUpperCase() }}</h3>
+                  <h4>{{ recipe.strArea }}-{{ recipe.strCategory }}</h4>
+                </div>
+              </router-link>
             </div>
           </transition>
         </div>
@@ -290,6 +292,7 @@ a {
   z-index: 2;
   width: 25%;
   padding: 4px;
+  box-shadow: 5px -3px 12px rgb(253, 203, 95, 0.5);
 }
 
 .button-back i {
@@ -306,6 +309,7 @@ a {
   margin: -5px auto;
   border-radius: 20px;
   z-index: 1;
+  box-shadow: 2px 2px 20px rgb(0, 0, 0, 0.5);
 }
 
 .cadre2 {
@@ -330,7 +334,7 @@ a {
 }
 .title {
   position: absolute;
-  background-color: var(--offWhite);
+  background-color: white;
   padding-top: 10px;
   margin: 21em 4%;
   width: 21em;
@@ -343,11 +347,13 @@ a {
   margin-bottom: 8px;
   margin-left: 1.7em;
   font-size: 14px;
+  color: black;
 }
 .title h4 {
   margin-bottom: 8px;
   margin-left: 1.7em;
   font-size: 14px;
+  color: black;
 }
 .imgRecipe {
   width: 83%;
@@ -388,6 +394,7 @@ a {
   height: 80px;
   width: 80px;
   z-index: 1;
+  box-shadow: 5px 3px 20px rgb(199, 229, 145, 1);
 }
 
 #fa-heart {
@@ -395,9 +402,11 @@ a {
 }
 .btn-nope {
   background-color: var(--mainRed);
+  box-shadow: 2px 2px 20px rgb(255, 140, 140, 0.5);
 }
 .btn-recipe {
   background-color: var(--mainBlue);
+  box-shadow: 5px 3px 20px rgb(60, 164, 255, 1);
 }
 .background {
   z-index: 3;
