@@ -66,7 +66,7 @@
       <router-link :to="{ name: 'Recipes', params: { mealId } }" class="btn-recipe">
         <i class="fas fa-book"></i>
       </router-link>
-      <form @submit.prevent="addRecipe">
+      <form @submit.prevent="add">
         <button class="btn-yes">
           <i class="fas fa-heart" id="fa-heart"></i>
         </button>
@@ -108,6 +108,7 @@ export default {
       user: null,
 
       throwoutright: VueSwing.Direction.RIGHT,
+      throwoutleft: VueSwing.Direction.LEFT,
 
       config: {
         allowedDirections: [
@@ -127,20 +128,17 @@ export default {
 
   methods: {
     addRecipe() {
-      db.collection("cookbook")
-        .add({
-          id: this.mealId,
-          title: this.title,
-          ingredients: this.ingredients,
-          measures: this.measures,
-          instruction: this.instruction,
-          img: this.img,
-          type: this.type,
-          user: this.user
-        })
-        .then(() => {
-          this.add();
-        });
+      db.collection("cookbook").add({
+        id: this.mealId,
+        title: this.title,
+        ingredients: this.ingredients,
+        measures: this.measures,
+        instruction: this.instruction,
+        img: this.img,
+        type: this.type,
+        user: this.user
+      });
+
       console.log("coucou");
     },
 
@@ -189,14 +187,21 @@ export default {
     },
 
     add() {
-      this.getRecipes();
       this.showAdd = false;
-      setTimeout(() => (this.showAdd = true), 500, this.getRecipes());
+      this.getRecipes();
+      setTimeout(() => (this.showAdd = true), 400, this.getRecipes());
+    },
+    addRight() {
+      // this.showAdd = false;
+      setTimeout(() => (this.showAdd = true), 400, this.getRecipes());
     },
     remove() {
-      this.getRecipes();
       this.showRemove = false;
-      setTimeout(() => (this.showRemove = true), 500, this.getRecipes());
+      setTimeout(() => (this.showRemove = true), 400, this.getRecipes());
+    },
+    removeLeft() {
+      // this.showRemove = false;
+      setTimeout(() => (this.showRemove = true), 400, this.getRecipes());
     },
 
     onThrowout({ throwDirection }) {
@@ -207,9 +212,10 @@ export default {
         if (throwDirection == this.throwoutright) {
           console.log("if");
           this.addRecipe();
+          this.addRight();
         } else {
           console.log("else");
-          this.remove();
+          this.removeLeft();
         }
       }, 100);
 

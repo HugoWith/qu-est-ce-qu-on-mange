@@ -24,7 +24,7 @@
           <h2>{{recipe.title }}</h2>
           <p>{{ recipe.type }}</p>
         </div>
-        <a @click.prevent="deleteRecipe(recipe.id)">
+        <a class="dislike-btn" @click.prevent="deleteRecipe(recipe.id)">
           <i class="fas fa-heart-broken"></i>
         </a>
       </div>
@@ -182,6 +182,11 @@ h1 {
   margin-top: 5px;
   margin-bottom: 5px;
   margin: 5px 20px 5px 10px;
+}
+
+.dislike-btn {
+  position: absolute;
+  right: 25px;
 }
 
 .fa-heart-broken {
