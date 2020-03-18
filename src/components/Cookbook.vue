@@ -7,12 +7,12 @@
     </div>
     <h1 class="title-cookbook">COOKBOOK</h1>
     <h2 v-if="feedback">{{ feedback}}</h2>
-    <form action class="form-cookbook">
+    <form action class="form-cookbook" prevent.default>
       <label for>Looking for something ?</label>
-      <input type="text" value="Apple" class="input-form" />
+      <input type="text" v-model="search" value="Apple" class="input-form" />
     </form>
 
-    <div class="cards-cookbook" v-for="(recipe, index) in cookbooks" :key="index">
+    <div class="cards-cookbook" v-for="(recipe, index) in filteredCookbook" :key="index">
       <div class="card-recipe">
         <div class="img-cookbook">
           <router-link :to="{ name: 'Recipes', params: { mealId: recipe.id } }">
@@ -50,7 +50,8 @@ export default {
     return {
       bgimg: "/bgimg.png",
       cookbooks: [],
-      feedback: null
+      feedback: null,
+      search: ""
     };
   },
   methods: {
@@ -112,6 +113,13 @@ export default {
         //   console.log(this.mealId);
         // });
       });
+  },
+  computed: {
+    filteredCookbook() {
+      return this.cookbooks.filter(recipe => {
+        return recipe.title.toLowerCase().match(this.search);
+      });
+    }
   }
 };
 </script>
