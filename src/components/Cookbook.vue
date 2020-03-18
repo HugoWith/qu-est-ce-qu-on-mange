@@ -24,7 +24,9 @@
           <h2>{{recipe.title }}</h2>
           <p>{{ recipe.type }}</p>
         </div>
-        <i class="fas fa-heart-broken"></i>
+        <a @click.prevent="deleteRecipe(recipe.id)">
+          <i class="fas fa-heart-broken"></i>
+        </a>
       </div>
     </div>
 
@@ -52,19 +54,42 @@ export default {
     };
   },
   methods: {
-    deleteRecipe() {
-      console.log("coucou");
-      db.collection("cookbook")
+    deleteRecipe(id) {
+      let recipe = db.collection("cookbook").where("id", "==", id);
+
+      recipe
         .get()
         .then(snapshot => {
           snapshot.forEach(el => {
-            let recipe = el.data();
-            console.log(recipe);
-            recipe.delete();
+            console.log(el.ref);
+            el.ref.delete();
+          });
+        })
+        .then(() => {
+          this.cookbooks = this.cookbooks.filter(recipe => {
+            return recipe.id != id;
           });
         });
     }
   },
+
+  // db.collection("cookbook")
+  //   .doc("id")
+  //   .delete()
+  //   .then(() => {
+  //     console.log(user);
+  //     console.log(this.cookbooks);
+  //     // this.cookbooks = this.cookbooks.delete();
+
+  //     // filter(recipe => {
+  //     //   return recipe.user != user;
+  //     // });
+  //     console.log("Document successfully deleted!");
+  //   })
+  //   .catch(function(error) {
+  //     console.error("Error removing document: ", error);
+  //   });
+
   created() {
     //get current user
 
@@ -157,5 +182,9 @@ h1 {
   margin-top: 5px;
   margin-bottom: 5px;
   margin: 5px 20px 5px 10px;
+}
+
+.fa-heart-broken {
+  color: black;
 }
 </style>
