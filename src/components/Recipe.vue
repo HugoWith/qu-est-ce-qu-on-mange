@@ -190,6 +190,7 @@ export default {
 
     add() {
       this.showAdd = false;
+      this.addRecipe();
       this.getRecipes();
       setTimeout(() => (this.showAdd = true), 400, this.getRecipes());
     },
